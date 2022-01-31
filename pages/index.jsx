@@ -5,7 +5,7 @@ const Home = ({props}) => {
   console.log("props are", props);
 
   return (
-    <Main />
+    <Main pathId={null} />
   )
 }
 
