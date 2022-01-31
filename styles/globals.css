@@ -1,16 +1,3 @@
-/* html, */
-/* body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-} */
-
 body {
   background-color: #150F09;
   color: #F9F7F5;
@@ -31,9 +18,18 @@ a {
   to { opacity: 0.0; }
 }
 
+@keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+
 .blinking {
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
   -webkit-animation-duration: 1.7s;
+  animation-name: blinker;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+  animation-duration: 1.7s;
 }

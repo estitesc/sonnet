@@ -35,7 +35,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({lines, addLine, isLatest}) => 
           <>
             <ConsoleInput onChange={(value)=>{setContent(value)}} onSubmit={submitLine} />
             <div style={{fontSize: 10, marginTop: 24}}>
-              Press "Enter" to submit line
+              Press &quot;Enter&quot; to submit line
             </div>
           </>
         );

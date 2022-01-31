@@ -5,7 +5,7 @@ function useIsDesktop() {
 
   React.useEffect(() => {
     setWidth(window.innerWidth);
-  });
+  }, []);
 
   const isDesktop = width >= 768;
 

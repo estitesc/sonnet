@@ -67,7 +67,7 @@ const Main = ({pathId}) => {
       console.log("error adding line", error);
       setLoading(false);
     })
-  }, [sonnet, setLoading]);
+  }, [sonnet.methods, account]);
 
   const poemCount = Math.ceil((lines.length + 1) / LINES_PER_POEM);
   const poemId = pathId && pathId < poemCount ? pathId : poemCount - 1;
@@ -80,7 +80,7 @@ const Main = ({pathId}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={account} poemCount={poemCount} poemId={poemId} />
+      <Navbar account={account} poemCount={poemCount} poemId={pathId == 'about' ? undefined : poemId} />
       {
         pathId == 'about' ?
           <AboutSection />

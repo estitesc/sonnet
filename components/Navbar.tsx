@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({account, poemCount, poemId}) => {
         <Link href={`/${index}`}><a>{index}</a></Link>
       );
     });
-  }, [poems]);
+  }, [poemId, poems]);
 
     return (
       <nav>

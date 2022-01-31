@@ -8,7 +8,7 @@ interface ConsoleInputProps {
 const ConsoleInput: React.FC<ConsoleInputProps> = ({onChange, onSubmit}) => {
     const [value, setValue] = React.useState("");
 
-    const handleKeyPress = (e: any) => {
+    const handleKeyPress = React.useCallback((e: any) => {
         if(e.code === 'Enter') {
             onSubmit();
             return;
@@ -34,7 +34,7 @@ const ConsoleInput: React.FC<ConsoleInputProps> = ({onChange, onSubmit}) => {
             setValue(newVal);
             onChange(newVal);
         }
-      }
+      }, [onChange, onSubmit, value]);
 
     React.useEffect(() => {
         document.addEventListener('keydown', handleKeyPress);
