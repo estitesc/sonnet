@@ -1,5 +1,5 @@
-html,
-body {
+/* html, */
+/* body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -9,8 +9,30 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+} */
+
+body {
+  background-color: #150F09;
+  color: #F9F7F5;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+  color: #2966A3;
 }
 
 * {
   box-sizing: border-box;
+}
+
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+
+.blinking {
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+  -webkit-animation-duration: 1.7s;
 }
