@@ -22,9 +22,12 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({lines, addLine, isLatest}) => 
       if(!isLatest) {
         const lastLine = lines[lines.length - 1];
         return (
+          lastLine ?
           <div style={{fontSize: 10, marginTop: 24}}>
-            {new Date(lastLine.addedAt.toNumber() * 1000).toDateString()}
+            {new Date(lastLine.addedAt * 1000).toDateString()}
           </div>
+          :
+          null
         )
       }
       if(isDesktop) {
