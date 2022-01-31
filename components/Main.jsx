@@ -67,7 +67,7 @@ const Main = ({pathId}) => {
       console.log("error adding line", error);
       setLoading(false);
     })
-  }, [sonnetCon.methods, account]);
+  }, [sonnetCon, account]);
 
   const poemCount = Math.ceil((lines.length + 1) / LINES_PER_POEM);
   const poemId = pathId && pathId < poemCount ? pathId : poemCount - 1;
