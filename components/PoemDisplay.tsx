@@ -75,7 +75,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({lines, addLine, isLatest}) => 
           marginLeft: isDesktop ? 72 : 0,
         }}>
         <div id="poem">
-          { lines.map((line, key) => {
+          { lines.map((line: any, key: string) => {
             return(
               <div key={key}>{line.content}</div>
             )

@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import PoemDisplay from './PoemDisplay';
 import AboutSection from './AboutSection';
 
-export const LINES_PER_POEM = 4;
+export const LINES_PER_POEM = 14;
 
 const loadWeb3 = async () => {
   if (window.ethereum) {
@@ -49,7 +49,6 @@ const Main = ({pathId}) => {
         const line = await sonnet.methods.lines(i).call();
         loadedLines.push(line);
       }
-      console.log("loaded lines", lines);
       setLines(loadedLines);
       setLoading(false);
     } else {
