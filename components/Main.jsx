@@ -23,7 +23,7 @@ const loadWeb3 = async () => {
 
 const Main = ({pathId}) => {
   const [account, setAccount] = React.useState(undefined);
-  const [sonnet, setSonnet] = React.useState(undefined);
+  const [sonnetCon, setSonnetCon] = React.useState(undefined);
   const [lines, setLines] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -41,7 +41,7 @@ const Main = ({pathId}) => {
     const networkData = Sonnet.networks[networkId]
     if(networkData) {
       const sonnet = new web3.eth.Contract(Sonnet.abi, networkData.address);
-      setSonnet(sonnet);
+      setSonnetCon(sonnet);
       const lineCount = await sonnet.methods.lineCount().call()
       // Load lines
       const loadedLines = [];
@@ -58,7 +58,7 @@ const Main = ({pathId}) => {
 
   const addLine = React.useCallback((content) => {
     setLoading(true);
-    sonnet.methods.addLine(content).send({ from: account })
+    sonnetCon.methods.addLine(content).send({ from: account })
     .on('confirmation', (confNumber, receipt) => {
       console.log("confirmed line added", confNumber, receipt);
       loadBlockchainData();
@@ -67,7 +67,7 @@ const Main = ({pathId}) => {
       console.log("error adding line", error);
       setLoading(false);
     })
-  }, [sonnet.methods, account]);
+  }, [sonnetCon.methods, account]);
 
   const poemCount = Math.ceil((lines.length + 1) / LINES_PER_POEM);
   const poemId = pathId && pathId < poemCount ? pathId : poemCount - 1;
