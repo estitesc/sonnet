@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styles from '../styles/Home.module.css'
-import Web3 from 'web3'
+import styles from '../styles/Home.module.css';
+import Web3 from 'web3';
 import Sonnet from '../abis/Sonnet.json';
 import Navbar from './Navbar';
 import PoemDisplay from './PoemDisplay';
@@ -42,11 +42,11 @@ const Main = ({pathId}) => {
     if(networkData) {
       const sonnet = new web3.eth.Contract(Sonnet.abi, networkData.address);
       setSonnetCon(sonnet);
-      const lineCount = await sonnet.methods.lineCount().call()
+      const lineCount = await sonnet?.methods.lineCount().call()
       // Load lines
       const loadedLines = [];
       for (var i = 1; i <= lineCount; i++) {
-        const line = await sonnet.methods.lines(i).call();
+        const line = await sonnet?.methods.lines(i).call();
         loadedLines.push(line);
       }
       setLines(loadedLines);
@@ -58,7 +58,7 @@ const Main = ({pathId}) => {
 
   const addLine = React.useCallback((content) => {
     setLoading(true);
-    sonnetCon.methods.addLine(content).send({ from: account })
+    sonnetCon?.methods.addLine(content).send({ from: account })
     .on('confirmation', (confNumber, receipt) => {
       console.log("confirmed line added", confNumber, receipt);
       loadBlockchainData();
