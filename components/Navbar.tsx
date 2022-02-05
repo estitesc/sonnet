@@ -15,9 +15,9 @@ const Navbar: React.FC<NavbarProps> = ({account, poemCount, poemId}) => {
     return poems.map((_poem, index) => {
       return (
         poemId == index ?
-        <span>{index}</span>
+        <span key={index}>{index}</span>
         :
-        <Link href={`/${index}`}><a>{index}</a></Link>
+        <Link href={`/${index}`} key={index}><a>{index}</a></Link>
       );
     });
   }, [poemId, poems]);

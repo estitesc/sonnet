@@ -2,6 +2,7 @@ body {
   background-color: #150F09;
   color: #F9F7F5;
   font-family: 'Courier New', Courier, monospace;
+  line-height: 125%;
 }
 
 a {

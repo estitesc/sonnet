@@ -16,6 +16,8 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({lines, addLine, isLatest}) => 
 
     const submitLine = React.useCallback(() => {
       addLine(content);
+      console.log("doing this", content);
+      setContent('');
     },[addLine, content]);
 
     const renderEditSection = () => {
@@ -77,7 +79,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({lines, addLine, isLatest}) => 
         <div id="poem">
           { lines.map((line: any, key: string) => {
             return(
-              <div key={key}>{line.content}</div>
+              <div key={key} style={{whiteSpace: 'pre'}}>{line.content}</div>
             )
           })}
         </div>
