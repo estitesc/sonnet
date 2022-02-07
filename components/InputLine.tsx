@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface ConsoleInputProps {
+interface InputLine {
     onChange: (e: any) => void;
     onSubmit: () => void;
 }
 
 export const MAX_CHARS = 28;
 
-const ConsoleInput: React.FC<ConsoleInputProps> = ({onChange, onSubmit}) => {
+const InputLine: React.FC<InputLine> = ({onChange, onSubmit}) => {
     const [value, setValue] = React.useState("");
 
     const handleKeyPress = React.useCallback((e: any) => {
@@ -47,9 +47,9 @@ const ConsoleInput: React.FC<ConsoleInputProps> = ({onChange, onSubmit}) => {
     return (
       <div style={{display: 'flex', height: 20}}>
           <span style={{whiteSpace: 'pre'}}>{value}</span>
-        <div className='blinking' style={{ width: 10, height: 20, backgroundColor: 'white'}} />
+        <div className='blinking' style={{ width: 10, height: 20, backgroundColor: '#FDFCFC'}} />
       </div>
     );
 }
 
-export default ConsoleInput;
+export default InputLine;

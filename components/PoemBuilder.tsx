@@ -85,12 +85,11 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish}) => {
         }}>
         <div id="poem">
           { lines.map((line: string, index: number) => {
-            console.log("line is", line, index, editingLine);
             return(
               index === editingLine ?
               <div key={index} style={{display: 'flex', height: 20}}>
                 <span style={{whiteSpace: 'pre'}}>{line}</span>
-                <div className='blinking' style={{ width: 10, height: 20, backgroundColor: 'white'}} />
+                <div className='blinking' style={{ width: 10, height: 20, backgroundColor: '#FDFCFC'}} />
               </div>
               :
               <div key={index} style={{whiteSpace: 'pre'}}>{line || " "}</div>
