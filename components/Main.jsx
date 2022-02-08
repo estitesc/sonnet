@@ -4,7 +4,6 @@ import Web3 from 'web3';
 import Sonnet from '../abis/Sonnet.json';
 import Navbar from './Navbar';
 import PoemDisplay from './PoemDisplay';
-import AboutSection from './AboutSection';
 
 export const LINES_PER_POEM = 14;
 
@@ -82,15 +81,12 @@ const Main = ({pathId}) => {
     <div className={styles.container}>
       <Navbar account={account} poemCount={poemCount} poemId={pathId == 'about' ? undefined : poemId} />
       {
-        pathId == 'about' ?
-          <AboutSection />
-          :
-          <div style={{paddingTop: 96}}>
-        { loading
-          ? <div style={{display: 'flex', justifyContent: 'center'}}><p>Writing...</p></div>
-          : <PoemDisplay lines={activeLines} addLine={addLine} isLatest={isLatest} />
-        }
-      </div>
+        <div style={{paddingTop: 96}}>
+          { loading
+            ? <div style={{display: 'flex', justifyContent: 'center'}}><p>Writing...</p></div>
+            : <PoemDisplay lines={activeLines} addLine={addLine} isLatest={isLatest} />
+          }
+        </div>
       }
     </div>
   )

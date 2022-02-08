@@ -21,7 +21,7 @@ const Welcome = ({props}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={"0x5ome1…"} />
+      <Navbar account={"0xWallet…"} />
       {
         step === 0 ?
         <UserSetup onSubmit={onSubmitAlias} />

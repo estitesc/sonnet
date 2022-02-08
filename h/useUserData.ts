@@ -3,12 +3,13 @@ import * as React from "react";
 function useUserData() {
 
     const getUserAlias = React.useCallback(() => {
-      const alias = localStorage.getItem('alias');
+      const alias = localStorage?.getItem('alias') || "";
       return alias
     }, []);
 
     const getPfpIndex = React.useCallback(() => {
-      const pfpIndex = parseInt(localStorage.getItem('pfpIndex') || "0");
+      const pfpIndexString = localStorage?.getItem('pfpIndex') || "0";
+      const pfpIndex = parseInt(pfpIndexString);
       return pfpIndex
     }, []);
 

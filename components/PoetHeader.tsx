@@ -7,14 +7,20 @@ import useUserData from '../h/useUserData';
 
 interface PoetHeaderProps {
   poemCount: number;
-  poetName: string;
 }
 
-const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poetName}) => {
+const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount}) => {
     const isDesktop = useIsDesktop();
     const { getUserAlias, getPfpIndex } = useUserData();
-    const pfpIndex = getPfpIndex() || 0;
-    const alias = getUserAlias() || "";
+    const [pfpIndex, setPfpIndex] = React.useState(0);
+    const [alias, setAlias] = React.useState("");
+
+    React.useEffect(() => {
+      const pfpIndex = getPfpIndex() || 0;
+      const alias = getUserAlias() || "";
+      setPfpIndex(pfpIndex);
+      setAlias(alias);
+    }, [getPfpIndex, getUserAlias]);
 
     const countString = React.useCallback(() => {
       if(poemCount > 1) {
