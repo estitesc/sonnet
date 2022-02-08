@@ -5,6 +5,7 @@ import useIsDesktop from '../h/useIsDesktop';
 import usePoemData from '../h/usePoemData';
 import BlockButton from './BlockButton';
 import InputLine from './InputLine';
+import SmallButton from './SmallButton';
 
 interface PoemBuilderProps {
   onPublish: (lines: string[]) => void;
@@ -101,7 +102,6 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
           { lines.map((line: string, index: number) => {
             return(
               index === editingLine ?
-              // <InputLine value={line} onChange={onChange} onSubmit={} />
               <div key={index} style={{display: 'flex', height: 20}}>
                 <span style={{whiteSpace: 'pre'}}>{line}</span>
                 <div className='blinking' style={{ width: 10, height: 20, backgroundColor: '#FDFCFC'}} />
@@ -111,6 +111,17 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
             )
           })}
         </div>
+        {
+          !isDesktop &&
+          <>
+            <input id="hiddenInput" style={{display: 'none'}}/>
+            <div style={{display: 'flex', alignItems: 'flex-start', marginTop: 24}}>
+              <SmallButton label="Open Keyboard" onClick={() => {
+                document.getElementById("hiddenInput")?.focus();
+              }} />
+            </div>
+          </>
+        }
         <div style={{fontSize: 10, marginTop: 24}}>
               Add up to {maxLength} lines &lt;{maxChars} chars
             </div>
