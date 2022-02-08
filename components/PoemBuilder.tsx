@@ -96,7 +96,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
         }}>
         <div style={{
           minWidth: 365,
-          marginLeft: isDesktop ? 72 : 0,
+          marginLeft: isDesktop ? 72 : 12,
         }}>
         <div id="poem">
           { lines.map((line: string, index: number) => {
@@ -113,14 +113,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
         </div>
         {
           !isDesktop &&
-          <>
-            <input id="hiddenInput" style={{display: 'none'}}/>
-            <div style={{display: 'flex', alignItems: 'flex-start', marginTop: 24}}>
-              <SmallButton label="Open Keyboard" onClick={() => {
-                document.getElementById("hiddenInput")?.focus();
-              }} />
-            </div>
-          </>
+            <input id="hiddenInput" style={{marginTop: 24}} value={lines[editingLine]} />
         }
         <div style={{fontSize: 10, marginTop: 24}}>
               Add up to {maxLength} lines &lt;{maxChars} chars

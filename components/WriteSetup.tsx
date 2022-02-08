@@ -12,8 +12,6 @@ interface WriteSetupProps {
 const WriteSetup: React.FC<WriteSetupProps> = ({onSubmit, poemLength, setPoemLength}) => {
     const isDesktop = useIsDesktop();
 
-    // const [poemLength, setPoemLength] = React.useState(14);
-
     const maxLength = poemLength;
     const maxChars = poemLength * 2;
 
@@ -28,10 +26,9 @@ const WriteSetup: React.FC<WriteSetupProps> = ({onSubmit, poemLength, setPoemLen
         }}>
         <div style={{
           minWidth: 365,
-          marginLeft: isDesktop ? 72 : 0,
+          marginLeft: isDesktop ? 72 : 12,
         }}>
           <div>
-            {/* <div style={{marginBottom: 24}}>Set up your poem</div> */}
             <div>choose a sonnet size</div>
             <div style={{display:'flex'}}>
               <PoemSizeButton size={10} width={28} onClick={() => setPoemLength(10)} isSelected={poemLength === 10} />

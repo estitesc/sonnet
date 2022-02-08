@@ -30,15 +30,20 @@ const UserSetup: React.FC<UserSetupProps> = ({onSubmit}) => {
         }}>
         <div style={{
           minWidth: 365,
-          marginLeft: isDesktop ? 72 : 0,
+          marginLeft: isDesktop ? 72 : 12,
         }}>
           <div>
-            <div>who are you?</div>
+            <div style={{fontWeight: 'bold'}}>who are you?</div>
             <div style={{display:'flex'}}>
-              <InputLine value={alias} setValue={setAlias} onSubmit={onSubmitAlias} />
+              <InputLine value={alias} setValue={setAlias} onSubmit={onSubmitAlias} maxLength={18} />
             </div>
+            {
+          !isDesktop &&
+            <input id="hiddenInput" style={{marginTop: 24}} value={alias} />
+        }
+            
             <div style={{marginTop: 24, fontSize: 12}}>
-              type up to 28 characters
+              type up to 18 characters
             </div>
           </div>
           <div style={{marginTop: 24}}>
