@@ -16,7 +16,8 @@ const loadWeb3 = async () => {
     window.web3 = new Web3(window.web3.currentProvider)
   }
   else {
-    window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    console.log("non ETH browser detected");
+    // window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
   }
 }
 
