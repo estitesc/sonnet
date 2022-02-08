@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import Main from '../components/Main';
 import useUserData from '../h/useUserData';
+import Navbar from '../components/NavbarNew';
+import styles from '../styles/Home.module.css';
 
 const Home = ({props}) => {
   console.log("props are", props);
@@ -27,7 +28,9 @@ const Home = ({props}) => {
   }, [alias.length, router]);
 
   return (
-    <Main pathId={null} />
+    <div className={styles.container}>
+      <Navbar account={"0xWallet…"} />
+    </div>
   )
 }
 

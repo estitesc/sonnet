@@ -11,7 +11,7 @@ const Write = ({props}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={"0xWallet…"} poemCount={1} poemId={1} />
+      <Navbar account={"0xWallet…"} />
       {
         step === 0 ?
         <WriteSetup onSubmit={() => {setStep(1)}} setPoemLength={setPoemLength} poemLength={poemLength}/>
