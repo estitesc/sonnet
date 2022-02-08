@@ -1,6 +1,7 @@
 import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
-import Image from "next/image";
+// import Image from "next/image";
+import Link from 'next/link';
 
 interface PoemSectionProps {
   poem: any;
@@ -9,8 +10,6 @@ interface PoemSectionProps {
 const PoemSection: React.FC<PoemSectionProps> = ({poem}) => {
     const isDesktop = useIsDesktop();
 
-    // 8.5 22- for desktop
-    // 6.4, 9, 19.5- worked well
     const getFontSize = (poemSize: number) => {
       if(isDesktop) {
         if(poemSize === 14) {
@@ -21,22 +20,28 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem}) => {
         }
       } else {
         if(poemSize === 14) {
-          return 6.4;
+          return 16;
         }
         if(poemSize === 10) {
-          return 9;
+          return 18;
         }
         else {
-          return 19.5 - poemSize;
+          return 28 - poemSize;
         }
       }
     }
 
     return (
       <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-        <div>
+        
+        <div style={{position: 'relative'}}>
+          <Link href="/collection">
+            <div style={{position: 'absolute', left: "-48px", top: 0, fontSize: 24, cursor: 'pointer'}}>
+              ←
+            </div>
+          </Link>
           <div style={{fontSize: 12, marginBottom: 24}}>
-            SONN3T #1124
+            SONN3T #{poem.index}
           </div>
           <div 
             id="content" 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PoemRow from './PoemRow';
 import _ from 'lodash';
+import PoemPlaceholder from './PoemPlaceholder';
 
 interface CollectionDisplayProps {
   poems: any;
@@ -18,9 +19,12 @@ const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
             maxWidth: 520,
           }}>
             {
+              poems.length > 0 ?
               chunks.map((chunk, index) => (
                 <PoemRow poems={chunk} key={index} />
               ))
+              :
+              <PoemPlaceholder />
             }
         </div>  
       </div>

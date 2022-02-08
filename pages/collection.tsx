@@ -86,7 +86,7 @@ const Collection: React.FC<CollectionProps> = ({props}) => {
   return (
     <div className={styles.container}>
       <Navbar account={"0x5ome1…"} poemCount={1} poemId={1} />
-      <PoetHeader poetName='marca.voleo' />
+      <PoetHeader poetName='marca.voleo' poemCount={poems.length} />
       <CollectionDisplay poems={poems}/>
     </div>
   )

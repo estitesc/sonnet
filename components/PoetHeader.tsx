@@ -5,11 +5,24 @@ import SmallButton from './SmallButton';
 import Link from 'next/link';
 
 interface PoetHeaderProps {
+  poemCount: number;
   poetName: string;
 }
 
-const PoetHeader: React.FC<PoetHeaderProps> = ({poetName}) => {
+const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poetName}) => {
     const isDesktop = useIsDesktop();
+
+    const countString = React.useCallback(() => {
+      if(poemCount > 1) {
+        return `${poemCount} poems`;
+      }
+      if(poemCount === 1) {
+        return 'a poem';
+      }
+      if(poemCount === 0) {
+        return isDesktop ? 'a space of poetic potential' : 'a poetic space';
+      }
+    }, [isDesktop, poemCount]);
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24}}>
@@ -34,7 +47,7 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poetName}) => {
               flexDirection: 'column',
               }}>
               <div style={{margin: '20px 0'}}>
-                28 poems
+                {countString()}
               </div>
               <div>
                 by
