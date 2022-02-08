@@ -48,7 +48,7 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem}) => {
             }}>
               { poem.lines.map((line: any, key: string) => {
                 return(
-                  <div key={key} style={{whiteSpace: 'pre'}}>{line}</div>
+                  <div key={key} style={{whiteSpace: 'pre'}}>{line || " "}</div>
                 )
               })}
           </div>

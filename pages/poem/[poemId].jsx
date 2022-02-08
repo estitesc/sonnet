@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Navbar from '../../components/NavbarNew';
 import PoemSection from '../../components/PoemSection';
 import styles from '../../styles/Home.module.css';
+import usePoemData from '../../h/usePoemData';
 
 const Poem = ({props}) => {
   console.log("props are", props);
@@ -52,7 +53,17 @@ const Poem = ({props}) => {
       lines: poemLines14,
   }
 
-  const poems = [poem12, poem14];
+//   const poems = [poem12, poem14];
+
+  const { getPoemData } = usePoemData();
+
+  const [ poems, setPoems ] = React.useState([]);
+
+  React.useEffect(() => {
+    const poems = getPoemData();
+    setPoems(poems);
+  }, [getPoemData]);
+
   const poem = poems[poemId] || poem12;
 
   return (

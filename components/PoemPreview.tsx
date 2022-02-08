@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
 
@@ -18,6 +19,7 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem}) => {
     }
 
     return (
+      <Link href={`/poem/${poem.index}`}>
       <div 
         id="content" 
         style={{
@@ -42,6 +44,7 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem}) => {
             )
           })}
       </div>
+      </Link>
     );
 }
 
