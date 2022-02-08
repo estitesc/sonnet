@@ -1,16 +1,13 @@
 import * as React from 'react';
-import useIsDesktop from '../h/useIsDesktop';
 import PoemRow from './PoemRow';
+import _ from 'lodash';
 
 interface CollectionDisplayProps {
   poems: any;
 }
 
 const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
-  const isDesktop = useIsDesktop();
-
-  const poemsForRow = [poems[0], poems[1], poems[2]];
-  const poemsForRow2 = [poems[3], poems[4], poems[5]];
+  const chunks = _.chunk(poems, 3);
 
     return (
       <div style={{display: 'flex', justifyContent: 'center'}}>
@@ -20,17 +17,11 @@ const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
             width: '100%',
             maxWidth: 520,
           }}>
-            <PoemRow poems={poemsForRow} />
-            <PoemRow poems={poemsForRow2} />
-            <PoemRow poems={poemsForRow} />
-            <PoemRow poems={poemsForRow2} />
-            <PoemRow poems={poemsForRow} />
-            <PoemRow poems={poemsForRow} />
-            {/* { poems.map((poem: any, key: string) => {
-              return(
-                <PoemDisplay poem={poem} key={key}/>
-              )
-            })} */}
+            {
+              chunks.map((chunk, index) => (
+                <PoemRow poems={chunk} key={index} />
+              ))
+            }
         </div>  
       </div>
     );

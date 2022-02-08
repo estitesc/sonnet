@@ -6,6 +6,8 @@ interface PoemRowProps {
 }
 
 const PoemRow: React.FC<PoemRowProps> = ({poems}) => {
+  const placeHolders = new Array(3 - poems.length).fill(null);
+
     return (
       <div 
         id="content" 
@@ -15,6 +17,11 @@ const PoemRow: React.FC<PoemRowProps> = ({poems}) => {
           { poems.map((poem: any, key: string) => {
             return(
               <PoemPreview poem={poem} key={key}/>
+            )
+          })}
+          { placeHolders.map((placeholder: void, key: number) => {
+            return(
+              <div style={{flex: 1}} key={key} />
             )
           })}
       </div>
