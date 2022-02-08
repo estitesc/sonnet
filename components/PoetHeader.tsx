@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Image from "next/image";
 import useIsDesktop from '../h/useIsDesktop';
+import SmallButton from './SmallButton';
+import Link from 'next/link';
 
 interface PoetHeaderProps {
   poetName: string;
@@ -8,7 +10,6 @@ interface PoetHeaderProps {
 
 const PoetHeader: React.FC<PoetHeaderProps> = ({poetName}) => {
     const isDesktop = useIsDesktop();
-    // console.log("poem is", poem);
 
     return (
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24}}>
@@ -23,14 +24,13 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poetName}) => {
           }}>
             <div style={{flex: 1}}>
             <div style={{height: 144, width: 144, overflow: 'hidden', borderRadius: 80}}>
-              <Image src="/disclaimed_witch.png" height={300} width={300} />
+              <Image src="/disclaimed_witch.png" height={144} width={144} />
             </div>
             </div>
             <div style={{
-              display: 'flex', 
-              flex: 2, 
-              padding: 12, 
-              // alignItems: 'flex-end', 
+              display: 'flex',
+              flex: 2,
+              padding: 12,
               flexDirection: 'column',
               }}>
               <div style={{margin: '20px 0'}}>
@@ -43,16 +43,9 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poetName}) => {
                 {poetName}
               </div>
               <div style={{display: 'flex', marginTop: 8}}>
-                <div style={{ 
-                  color: '#0B0705', 
-                  backgroundColor: '#FDFCFC', 
-                  padding: 4, 
-                  borderRadius: 4,
-                  fontSize: 10,
-                  lineHeight: 1,
-                  fontWeight: 'bold'
-                  }}>send tip</div>
-                {/* <div>nudge</div> */}
+                <Link href="/write">
+                  <SmallButton onClick={() => {}} label="add a poem" />
+                </Link>
               </div>
               {/* <div>
                 12.26.21 - 1.30.22

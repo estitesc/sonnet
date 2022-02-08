@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
 // import PublishButton from './PublishButton';
@@ -18,6 +19,8 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
     const maxLength = poemLength;
     const maxChars = poemLength * 2;
 
+    const router = useRouter();
+
     const { addPoem } = usePoemData();
     const onSaveLocal = (lines: string[]) => {
       const newPoem = {
@@ -26,6 +29,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
       }
 
       addPoem(newPoem);
+      router.push('/collection');
     }
 
     const newLineOrDown = React.useCallback(() => {
