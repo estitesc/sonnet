@@ -1,15 +1,13 @@
 import React from 'react';
 
 interface InputLine {
-    onChange: (e: any) => void;
+    value: string;
+    setValue: (val: string) => void;
     onSubmit: () => void;
+    maxLength?: number;
 }
 
-export const MAX_CHARS = 28;
-
-const InputLine: React.FC<InputLine> = ({onChange, onSubmit}) => {
-    const [value, setValue] = React.useState("");
-
+const InputLine: React.FC<InputLine> = ({value, setValue, onSubmit, maxLength = 28}) => {
     const handleKeyPress = React.useCallback((e: any) => {
         if(e.code === 'Enter') {
             onSubmit();
@@ -23,7 +21,7 @@ const InputLine: React.FC<InputLine> = ({onChange, onSubmit}) => {
             newVal = value.substring(0, value.length - 1);
         }
 
-        if(value.length <= MAX_CHARS) {
+        if(value.length <= maxLength) {
             if(e.key.length === 1) {
                 newVal = `${value}${e.key}`;
             }
@@ -35,9 +33,8 @@ const InputLine: React.FC<InputLine> = ({onChange, onSubmit}) => {
 
         if(newVal !== value) {
             setValue(newVal);
-            onChange(newVal);
         }
-      }, [onChange, onSubmit, value]);
+      }, [value, maxLength, onSubmit, setValue]);
 
     React.useEffect(() => {
         document.addEventListener('keydown', handleKeyPress);
@@ -47,7 +44,7 @@ const InputLine: React.FC<InputLine> = ({onChange, onSubmit}) => {
     return (
       <div style={{display: 'flex', height: 20}}>
           <span style={{whiteSpace: 'pre'}}>{value}</span>
-        <div className='blinking' style={{ width: 10, height: 20, backgroundColor: '#FDFCFC'}} />
+            <div className='blinking' style={{ width: 10, height: 20, backgroundColor: '#FDFCFC'}} />
       </div>
     );
 }

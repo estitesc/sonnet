@@ -4,6 +4,7 @@ import useIsDesktop from '../h/useIsDesktop';
 // import PublishButton from './PublishButton';
 import usePoemData from '../h/usePoemData';
 import BlockButton from './BlockButton';
+import InputLine from './InputLine';
 
 interface PoemBuilderProps {
   onPublish: (lines: string[]) => void;
@@ -100,6 +101,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
           { lines.map((line: string, index: number) => {
             return(
               index === editingLine ?
+              // <InputLine value={line} onChange={onChange} onSubmit={} />
               <div key={index} style={{display: 'flex', height: 20}}>
                 <span style={{whiteSpace: 'pre'}}>{line}</span>
                 <div className='blinking' style={{ width: 10, height: 20, backgroundColor: '#FDFCFC'}} />

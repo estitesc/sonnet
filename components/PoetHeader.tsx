@@ -3,6 +3,7 @@ import Image from "next/image";
 import useIsDesktop from '../h/useIsDesktop';
 import SmallButton from './SmallButton';
 import Link from 'next/link';
+import useUserData from '../h/useUserData';
 
 interface PoetHeaderProps {
   poemCount: number;
@@ -11,6 +12,9 @@ interface PoetHeaderProps {
 
 const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poetName}) => {
     const isDesktop = useIsDesktop();
+    const { getUserAlias, getPfpIndex } = useUserData();
+    const pfpIndex = getPfpIndex() || 0;
+    const alias = getUserAlias() || "";
 
     const countString = React.useCallback(() => {
       if(poemCount > 1) {
@@ -37,7 +41,7 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poetName}) => {
           }}>
             <div style={{flex: 1}}>
             <div style={{height: 144, width: 144, overflow: 'hidden', borderRadius: 80}}>
-              <Image src="/disclaimed_witch.png" height={144} width={144} />
+              <Image src={`/pfps/pfp_${pfpIndex}.png`} height={144} width={144} />
             </div>
             </div>
             <div style={{
@@ -53,7 +57,7 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poetName}) => {
                 by
               </div>
               <div>
-                {poetName}
+                {alias}
               </div>
               <div style={{display: 'flex', marginTop: 8}}>
                 <Link href="/write">

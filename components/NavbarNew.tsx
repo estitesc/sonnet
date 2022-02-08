@@ -6,12 +6,9 @@ import useIsDesktop from '../h/useIsDesktop';
 
 interface NavbarProps {
     account: string;
-    poemCount: number;
-    poemId: number;
   }
 
-const Navbar: React.FC<NavbarProps> = ({account, poemCount, poemId}) => {
-  const poems = new Array(poemCount).fill(undefined);
+const Navbar: React.FC<NavbarProps> = ({account}) => {
   const isDesktop = useIsDesktop();
 
     return (
@@ -19,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({account, poemCount, poemId}) => {
         <div style={{display: 'flex', flexDirection: 'row', flex: 1, justifyContent: 'space-between', padding: "16px 0px"}}>
           <div style={{paddingLeft: isDesktop ? 0 : 12}}>
             <Link href="/about">
-              <div>
+              <div style={{cursor: 'pointer'}}>
                 <Image src="/icon_small_b_w.png" width={32} height={32} />
               </div>
             </Link> 
