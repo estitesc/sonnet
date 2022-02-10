@@ -20,7 +20,12 @@ function usePoemData() {
 
     const addPoem = (poem: any) => {
       const poems = getPoemData();
-      const newPoems = [...poems, poem];
+      const poemWithDate = {
+        ...poem,
+        createdAt: new Date().getTime(),
+      }
+      const newPoems = [...poems, poemWithDate];
+      console.log("new poems is", newPoems);
       setPoemData(newPoems);
     }
 

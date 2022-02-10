@@ -6,19 +6,11 @@ import styles from '../styles/Home.module.css';
 
 const Home = ({props}) => {
   console.log("props are", props);
-  const { getUserAlias, getPfpIndex } = useUserData();
-  const [pfpIndex, setPfpIndex] = React.useState(0);
-  const [alias, setAlias] = React.useState("");
-
-  React.useEffect(() => {
-    const pfpIndex = getPfpIndex() || 0;
-    const alias = getUserAlias() || "";
-    setPfpIndex(pfpIndex);
-    setAlias(alias);
-  }, [getPfpIndex, getUserAlias]);
+  const { alias } = useUserData();
 
   const router = useRouter();
 
+  // This redirection gives inconsistent results. Race condition?
   React.useEffect(() => {
     if(alias.length) {
       router.push('/collection');

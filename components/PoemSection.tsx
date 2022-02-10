@@ -2,6 +2,8 @@ import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
 // import Image from "next/image";
 import Link from 'next/link';
+import useUserData from '../h/useUserData';
+import SmallButton from './SmallButton';
 
 interface PoemSectionProps {
   poem: any;
@@ -9,6 +11,7 @@ interface PoemSectionProps {
 
 const PoemSection: React.FC<PoemSectionProps> = ({poem}) => {
     const isDesktop = useIsDesktop();
+    const { alias, pfpIndex } = useUserData();
 
     const getFontSize = (poemSize: number) => {
       if(isDesktop) {
@@ -58,7 +61,12 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem}) => {
               })}
           </div>
           <div style={{fontSize: 12, marginTop: 24}}>
-            09.23.22
+            {
+              poem.createdAt ?
+              new Date(poem.createdAt).toLocaleDateString('en-us', { year:"numeric", month:"2-digit", day: '2-digit'})
+              :
+              '09.23.22'
+            }
           </div>
           {/* <div style={{display: 'flex', alignItems: 'center' , marginTop: 24}}>
             <div style={{height: 28, width: 28, overflow: 'hidden', borderRadius: 12, marginRight: 12}}>
@@ -77,26 +85,18 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem}) => {
             </div> */}
           
           <div style={{fontSize: 12, marginTop: 24}}>
-            <b>poet</b> marca.soli
+            <b>poet</b> {alias}
           </div>
           <div style={{fontSize: 12}}>
-            <b>patron</b> charli0.eth
+            <b>patron</b> 0xpatron.eth
           </div>
           <div style={{display: 'flex', alignItems: 'baseline'}}>
           <div style={{fontSize: 12, marginTop: 4}}>
             <b>last</b> ⧫ 2.2
           </div>
           <div style={{display: 'inline-block', marginLeft: 12}}>
-                <div style={{ 
-                  color: '#0B0705', 
-                  backgroundColor: '#FDFCFC', 
-                  padding: 4,
-                  borderRadius: 4,
-                  fontSize: 10,
-                  lineHeight: 1,
-                  fontWeight: 'bold'
-                  }}>make offer</div>
-              </div>
+            <SmallButton label="make offer" onClick={() => {}} />
+          </div>
           </div>
           
         </div>

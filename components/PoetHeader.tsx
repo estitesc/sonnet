@@ -11,16 +11,7 @@ interface PoetHeaderProps {
 
 const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount}) => {
     const isDesktop = useIsDesktop();
-    const { getUserAlias, getPfpIndex } = useUserData();
-    const [pfpIndex, setPfpIndex] = React.useState(0);
-    const [alias, setAlias] = React.useState("");
-
-    React.useEffect(() => {
-      const pfpIndex = getPfpIndex() || 0;
-      const alias = getUserAlias() || "";
-      setPfpIndex(pfpIndex);
-      setAlias(alias);
-    }, [getPfpIndex, getUserAlias]);
+    const { alias, pfpIndex } = useUserData();
 
     const countString = React.useCallback(() => {
       if(poemCount > 1) {
