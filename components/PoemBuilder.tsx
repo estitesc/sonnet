@@ -15,11 +15,12 @@ interface PoemBuilderProps {
 const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
     const isDesktop = useIsDesktop();
 
-    const [lines, setLines] = React.useState([""]);
-    const [editingLine, setEditingLine] = React.useState(0);
-
     const maxLength = poemLength;
     const maxChars = poemLength * 2;
+
+    // const [lines, setLines] = React.useState(new Array(maxLength).fill(""));
+    const [lines, setLines] = React.useState([""]);
+    const [editingLine, setEditingLine] = React.useState(0);
 
     const router = useRouter();
 
@@ -110,7 +111,8 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
           minWidth: 365,
           marginLeft: isDesktop ? 72 : 12,
         }}>
-        <div id="poem">
+        <div id="poem" style={{}}>
+          <div style={{padding: 0}}>
           { lines.map((line: string, index: number) => {
             return(
               index === editingLine ?
@@ -122,6 +124,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
               <div key={index} style={{whiteSpace: 'pre'}}>{line || " "}</div>
             )
           })}
+          </div>
         </div>
         {
           !isDesktop &&

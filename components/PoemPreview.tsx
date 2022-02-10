@@ -12,29 +12,54 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem}) => {
 
     const getFontSize = (poemSize: number) => {
       if(isDesktop) {
-        return 12;
+        if(poemSize === 14) {
+          return 6;
+        }
+        if(poemSize === 12) {
+          return 7;
+        }
+        if(poemSize === 10) {
+          return 8.5;
+        }
+        else {
+          return 19 - poemSize;
+        }
       } else {
-        return 11;
+        if(poemSize === 14) {
+          return 5;
+        }
+        if(poemSize === 12) {
+          return 5.5;
+        }
+        if(poemSize === 10) {
+          return 6.5;
+        }
+        else {
+          return 18 - poemSize;
+        }
       }
     }
 
     return (
       <Link href={`/poem/${poem.index}`}>
+        <div style={{
+          border: 'solid 1px #FDFCFC', 
+          flex: 1, 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          margin: isDesktop ? '0px 12px 24px 12px' : '6px',
+          width: isDesktop ? 144 : 106,
+          height: isDesktop ? 144 : 106,
+          backgroundColor: mouseOver ? '#E7DFDA' : '#0B0705',
+          cursor: 'pointer',
+        }}>
       <div 
         id="content" 
         style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection:'column',
-          margin: isDesktop ? '0px 12px 24px 12px' : '6px',
           fontSize: getFontSize(poem.size),
           lineHeight: '125%',
-          width: isDesktop ? 144 : 106,
-          height: isDesktop ? 144 : 106,
-          border: 'solid 1px #FDFCFC',
           overflow: 'hidden',
-          cursor: 'pointer',
-          backgroundColor: mouseOver ? '#E7DFDA' : '#0B0705'
         }}
         onMouseEnter={() => setMouseOver(true)}
         onMouseLeave={() => setMouseOver(false)}>
@@ -43,6 +68,7 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem}) => {
               <div key={key} style={{whiteSpace: 'pre'}}>{line || "  "}</div>
             )
           })}
+      </div>
       </div>
       </Link>
     );

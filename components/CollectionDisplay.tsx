@@ -16,7 +16,7 @@ const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
           id="content" 
           style={{
             width: '100%',
-            maxWidth: 520,
+            maxWidth: 506,
           }}>
             {
               poems.length > 0 ?
