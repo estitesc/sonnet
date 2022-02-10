@@ -60,7 +60,16 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
       let newVal = currVal;
 
       if(e.code === 'Backspace') {
-        newVal = currVal.substring(0, currVal.length - 1);
+        if(currVal.length === 0) {
+          // Delete the entire current line (as it's down to nothing)
+          let newLines = lines;
+          newLines.splice(editingLine, 1);
+          setLines([...newLines]);
+          setEditingLine(editingLine - 1);
+          return;
+        } else {
+          newVal = currVal.substring(0, currVal.length - 1);
+        }
       }
 
       if(currVal.length <= maxChars) {
