@@ -18,8 +18,8 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
     const maxLength = poemLength;
     const maxChars = poemLength * 2;
 
-    // const [lines, setLines] = React.useState(new Array(maxLength).fill(""));
-    const [lines, setLines] = React.useState([""]);
+    const [lines, setLines] = React.useState(new Array(maxLength).fill(""));
+    // const [lines, setLines] = React.useState([""]);
     const [editingLine, setEditingLine] = React.useState(0);
 
     const router = useRouter();
@@ -61,14 +61,18 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
       let newVal = currVal;
 
       if(e.code === 'Backspace') {
+        if(!currVal) {
+          return;
+        }
+
         if(currVal.length === 0) {
           // Delete the entire current line (as it's down to nothing)
-          if(lines.length === 1) {
-            return;
-          }
-          let newLines = lines;
-          newLines.splice(editingLine, 1);
-          setLines([...newLines]);
+          // if(lines.length === 1) {
+          //   return;
+          // }
+          // let newLines = lines;
+          // newLines.splice(editingLine, 1);
+          // setLines([...newLines]);
           setEditingLine(editingLine - 1);
           return;
         } else {
@@ -90,8 +94,17 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
           let newLines = lines;
           newLines.splice(editingLine, 1, newVal);
           setLines([...newLines]);
+          
+          // Go to next line if that's the last char
+          if(
+            newVal.length === maxChars && 
+            editingLine < maxLength - 1 && 
+            lines[editingLine + 1].length === 0
+          ) {
+            setEditingLine(editingLine + 1);
+          }
       }
-    }, [lines, editingLine, maxChars, newLineOrDown]);
+    }, [lines, editingLine, maxChars, newLineOrDown, maxLength]);
 
     React.useEffect(() => {
       document.addEventListener('keydown', handleKeyPress);
@@ -108,11 +121,11 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
           width: '100%'
         }}>
         <div style={{
-          minWidth: 365,
+          minWidth: 258,
           marginLeft: isDesktop ? 72 : 12,
         }}>
-        <div id="poem" style={{}}>
-          <div style={{padding: 0}}>
+        <div id="poem" style={{ border: 'solid 1px #333'}}>
+          <div style={{padding: '12px 0px 12px 12px'}}>
           { lines.map((line: string, index: number) => {
             return(
               index === editingLine ?
