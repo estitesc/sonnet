@@ -141,7 +141,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
         </div>
         {
           !isDesktop &&
-            <input id="hiddenInput" style={{marginTop: 24}} value={lines[editingLine]} />
+            <input id="hiddenInput" style={{marginTop: 24, fontSize: 14, width: 254, height: 24}} value={lines[editingLine]} />
         }
         <div style={{fontSize: 10, marginTop: 24}}>
               Add up to {maxLength} lines &lt;{maxChars} chars
