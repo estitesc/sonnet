@@ -13,11 +13,12 @@ const Collection: React.FC<CollectionProps> = ({props}) => {
   console.log("props are", props);
 
   const { account, poet, poems } = useSinglePoetData();
+  console.log("back from", { account, poet, poems });
 
   return (
     <div className={styles.container}>
       <Navbar account={account} />
-      <PoetHeader poemCount={poems.length} poet={poet} />
+      <PoetHeader poemCount={poems.length} poet={poet} account={account} />
       <CollectionDisplay poems={poems}/>
     </div>
   )

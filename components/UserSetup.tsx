@@ -44,7 +44,7 @@ const UserSetup: React.FC<UserSetupProps> = ({alias, setAlias, onSubmit, errorMs
             </div>
             {
           !isDesktop &&
-            <input id="hiddenInput" style={{marginTop: 24}} value={alias} />
+            <input id="hiddenInput" style={{marginTop: 24}} value={alias} onChange={() => {}} />
         }
             
             <div style={{marginTop: 24, fontSize: 12}}>

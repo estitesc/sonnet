@@ -3,14 +3,14 @@ import Image from "next/image";
 import useIsDesktop from '../h/useIsDesktop';
 import SmallButton from './SmallButton';
 import Link from 'next/link';
-import useUserData from '../h/useUserData';
 
 interface PoetHeaderProps {
   poemCount: number;
   poet: any;
+  account: string;
 }
 
-const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poet}) => {
+const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poet, account}) => {
     const isDesktop = useIsDesktop();
 
     const countString = React.useCallback(() => {
@@ -59,11 +59,14 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poet}) => {
               <div>
                 {poet.name}
               </div>
-              <div style={{display: 'flex', marginTop: 8}}>
+              {
+                account === poet.wallet &&
+                <div style={{display: 'flex', marginTop: 8}}>
                 <Link href="/write">
                   <SmallButton onClick={() => {}} label="add a poem" />
                 </Link>
               </div>
+              }
             </div>
         </div>
       </div>

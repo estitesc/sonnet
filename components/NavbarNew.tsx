@@ -22,7 +22,12 @@ const Navbar: React.FC<NavbarProps> = ({account}) => {
             </Link> 
           </div>
           <a style={{color: "#F9F7F5", paddingRight: isDesktop ? 0 : 12}}>
-            <span >{_.truncate(account, {length: 12, omission: '…'})}</span>
+            {
+              account ?
+              <span >{_.truncate(account, {length: 12, omission: '…'})}</span>
+              :
+              <span>Connect Wallet</span>
+            }
           </a>
         </div>
       </nav>
