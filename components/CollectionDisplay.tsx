@@ -2,13 +2,16 @@ import * as React from 'react';
 import PoemRow from './PoemRow';
 import _ from 'lodash';
 import PoemPlaceholder from './PoemPlaceholder';
+import convertPoem from '../utils/convertPoem';
 
 interface CollectionDisplayProps {
   poems: any;
 }
 
 const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
-  const chunks = _.chunk(poems, 3);
+  const poemObjects = poems.map((poem: any) => convertPoem(poem));
+
+  const chunks = _.chunk(poemObjects, 3);
 
     return (
       <div style={{display: 'flex', justifyContent: 'center'}}>

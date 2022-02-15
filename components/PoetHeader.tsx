@@ -7,11 +7,11 @@ import useUserData from '../h/useUserData';
 
 interface PoetHeaderProps {
   poemCount: number;
+  poet: any;
 }
 
-const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount}) => {
+const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poet}) => {
     const isDesktop = useIsDesktop();
-    const { alias, pfpIndex } = useUserData();
 
     const countString = React.useCallback(() => {
       if(poemCount > 1) {
@@ -38,7 +38,10 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount}) => {
           }}>
             <div style={{flex: 1}}>
             <div style={{height: 144, width: 144, overflow: 'hidden', borderRadius: 80}}>
-              <Image src={`/pfps/pfp_${pfpIndex}.png`} height={144} width={144} />
+              {
+                poet.pfpUrl &&
+                <Image src={poet.pfpUrl} height={144} width={144} />
+              }
             </div>
             </div>
             <div style={{
@@ -54,16 +57,13 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount}) => {
                 by
               </div>
               <div>
-                {alias}
+                {poet.name}
               </div>
               <div style={{display: 'flex', marginTop: 8}}>
                 <Link href="/write">
                   <SmallButton onClick={() => {}} label="add a poem" />
                 </Link>
               </div>
-              {/* <div>
-                12.26.21 - 1.30.22
-              </div> */}
             </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import * as React from "react";
 
 function usePoemData() {
-
     const getPoemData = React.useCallback(() => {
       const poems = localStorage.getItem('poems');
       if(poems) {

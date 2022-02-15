@@ -1,38 +1,39 @@
+import _ from 'lodash';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
-// import PublishButton from './PublishButton';
-import usePoemData from '../h/usePoemData';
 import BlockButton from './BlockButton';
-import InputLine from './InputLine';
-import SmallButton from './SmallButton';
 
 interface PoemBuilderProps {
-  onPublish: (lines: string[]) => void;
   poemLength: number;
+  addPoem: (
+    name: string,
+    content: string,
+    setErrorMsg: (msg: string) => void,
+    onSuccess: () => void
+  ) => void;
 }
 
-const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
+const PoemBuilder: React.FC<PoemBuilderProps> = ({poemLength, addPoem}) => {
     const isDesktop = useIsDesktop();
 
     const maxLength = poemLength;
     const maxChars = poemLength * 2;
 
     const [lines, setLines] = React.useState(new Array(maxLength).fill(""));
-    // const [lines, setLines] = React.useState([""]);
     const [editingLine, setEditingLine] = React.useState(0);
+    const [errorMsg, setErrorMsg] = React.useState("");
 
     const router = useRouter();
 
-    const { addPoem } = usePoemData();
-    const onSaveLocal = (lines: string[]) => {
-      const newPoem = {
-        size: poemLength,
-        lines: lines,
-      }
+    const onSavePoem = (lines: string[]) => {
+      const name = "";
+      const content = _.join(lines, '\n');
 
-      addPoem(newPoem);
-      router.push('/collection');
+      const onError = (msg: string) => setErrorMsg(msg);
+      const onSuccess = () => router.push('/collection');
+
+      addPoem(name, content, onError, onSuccess);
     }
 
     const newLineOrDown = React.useCallback(() => {
@@ -66,13 +67,6 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
         }
 
         if(currVal.length === 0) {
-          // Delete the entire current line (as it's down to nothing)
-          // if(lines.length === 1) {
-          //   return;
-          // }
-          // let newLines = lines;
-          // newLines.splice(editingLine, 1);
-          // setLines([...newLines]);
           setEditingLine(editingLine - 1);
           return;
         } else {
@@ -121,9 +115,13 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
           width: '100%'
         }}>
         <div style={{
-          minWidth: 258,
+          width: 258,
           marginLeft: isDesktop ? 72 : 12,
         }}>
+          {
+            errorMsg &&
+            <div style={{fontStyle: 'italic', paddingBottom: 24}}>{errorMsg}</div>
+          }
         <div id="poem" style={{ border: 'solid 1px #333'}}>
           <div style={{padding: '12px 0px 12px 12px'}}>
           { lines.map((line: string, index: number) => {
@@ -141,7 +139,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
         </div>
         {
           !isDesktop &&
-            <input id="hiddenInput" style={{marginTop: 24, fontSize: 14, width: 254, height: 24}} value={lines[editingLine]} />
+            <input id="hiddenInput" style={{marginTop: 24, fontSize: 14, width: 254, height: 24}} value={lines[editingLine]} onChange={() => {}} />
         }
         <div style={{fontSize: 10, marginTop: 24}}>
               Add up to {maxLength} lines &lt;{maxChars} chars
@@ -149,8 +147,7 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({onPublish, poemLength}) => {
             {
               (lines.length > 1 || lines[0].length > 0) &&
               <div>
-                <BlockButton label="Save Locally" onClick={() => onSaveLocal(lines)} />
-                {/* <PublishButton onPublish={() => onPublish(lines)} /> */}
+                <BlockButton label="Save On Chain" onClick={() => onSavePoem(lines)} />
               </div>
             }
         </div>
