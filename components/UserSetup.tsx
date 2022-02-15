@@ -4,18 +4,19 @@ import BlockButton from './BlockButton';
 import InputLine from './InputLine';
 
 interface UserSetupProps {
+  alias: string;
+  setAlias: (alias: string) => void;
   onSubmit: () => void;
+  errorMsg: string;
 }
 
-const UserSetup: React.FC<UserSetupProps> = ({onSubmit}) => {
-    const [ alias, setAlias ] = React.useState("");
+const UserSetup: React.FC<UserSetupProps> = ({alias, setAlias, onSubmit, errorMsg}) => {
     const isDesktop = useIsDesktop();
 
     const onSubmitAlias = React.useCallback(() => {
       if(alias.length === 0) {
         return;
       }
-      localStorage.setItem('alias', alias);
       onSubmit();
     }, [alias, onSubmit]);
 
@@ -33,6 +34,10 @@ const UserSetup: React.FC<UserSetupProps> = ({onSubmit}) => {
           marginLeft: isDesktop ? 72 : 12,
         }}>
           <div>
+            {
+              errorMsg &&
+              <div style={{fontStyle: 'italic', paddingBottom: 24}}>{errorMsg}</div>
+            }
             <div style={{fontWeight: 'bold'}}>who are you?</div>
             <div style={{display:'flex'}}>
               <InputLine value={alias} setValue={setAlias} onSubmit={onSubmitAlias} maxLength={18} />
@@ -48,7 +53,7 @@ const UserSetup: React.FC<UserSetupProps> = ({onSubmit}) => {
           </div>
           <div style={{marginTop: 24}}>
             </div>
-            <BlockButton label='Confirm' onClick={onSubmitAlias} />
+            <BlockButton label='Next' onClick={onSubmitAlias} />
         </div>
         
       </div>

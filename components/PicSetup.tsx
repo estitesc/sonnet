@@ -4,19 +4,20 @@ import BlockButton from './BlockButton';
 import Image from 'next/image';
 
 interface PicSetupProps {
+  pfpUrl: string;
+  setPfpUrl: (url: string) => {};
   onSubmit: () => void;
+  errorMsg: string;
 }
 
-const PicSetup: React.FC<PicSetupProps> = ({onSubmit}) => {
-    const [ pfpIndex, setPfpIndex ] = React.useState(0);
+const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMsg}) => {
     const isDesktop = useIsDesktop();
 
     const pics = new Array(6).fill(null);
 
-    const onSubmitPic= React.useCallback(() => {
-      localStorage.setItem('pfpIndex', pfpIndex.toString());
-      onSubmit();
-    }, [pfpIndex, onSubmit]);
+    const onSelectPic = React.useCallback((picIndex: number) => {
+      setPfpUrl(`http://sonn3t.com/pfps/pfp_${picIndex}.png`);
+    }, [setPfpUrl]);
 
     return (
       <div 
@@ -32,6 +33,10 @@ const PicSetup: React.FC<PicSetupProps> = ({onSubmit}) => {
           marginLeft: isDesktop ? 72 : 0,
         }}>
           <div>
+            {
+              errorMsg &&
+              <div style={{fontStyle: 'italic', paddingBottom: 24}}>{errorMsg}</div>
+            }
             <div>choose a profile pic</div>
             <div style={{display:'flex', maxWidth: 400}}>
               {
@@ -40,7 +45,7 @@ const PicSetup: React.FC<PicSetupProps> = ({onSubmit}) => {
                     <div
                       key={index}
                       style={{width: 64, height: 64, cursor: 'pointer'}}
-                      onClick={() => setPfpIndex(index)}
+                      onClick={() => onSelectPic(index)}
                     >
                       <Image src={`/pfps/pfp_${index}.png`} height={64} width={64} />
                     </div>
@@ -49,7 +54,7 @@ const PicSetup: React.FC<PicSetupProps> = ({onSubmit}) => {
               }
             </div>
             <div style={{marginTop: 32, width: 240, height: 240, borderRadius: 120, overflow: 'hidden'}}>
-              <Image src={`/pfps/pfp_${pfpIndex}.png`} height={240} width={240}/>
+              <Image src={pfpUrl} height={240} width={240}/>
             </div>
             <div style={{marginTop: 24, fontSize: 12}}>
               the ability to upload is coming soon :)
@@ -57,7 +62,7 @@ const PicSetup: React.FC<PicSetupProps> = ({onSubmit}) => {
           </div>
           <div style={{marginTop: 24}}>
             </div>
-            <BlockButton label='Confirm' onClick={onSubmitPic} />
+            <BlockButton label='Confirm' onClick={onSubmit} />
         </div>
         
       </div>
