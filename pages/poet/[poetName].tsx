@@ -34,7 +34,7 @@ const PoetPage: React.FC<PoetPageProps> = ({props}) => {
         </>
         :
         <div style={{textAlign: 'center', marginTop: 24}}>
-          No poet by that name...
+          A poet by any other name...
         </div>
       }
       
