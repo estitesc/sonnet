@@ -62,11 +62,10 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({poemLength, addPoem}) => {
       let newVal = currVal;
 
       if(e.code === 'Backspace') {
-        if(!currVal) {
-          return;
-        }
-
         if(currVal.length === 0) {
+          if(editingLine === 0) {
+            return;
+          }
           setEditingLine(editingLine - 1);
           return;
         } else {
