@@ -32,6 +32,14 @@ contract NaiveSonnetPub {
         address payable wallet
     );
 
+    event PoetUpdated(
+        uint id,
+        uint createdAt,
+        string name,
+        string pfpUrl,
+        address payable wallet
+    );
+
     event PoemAdded(
         uint id,
         uint createdAt,
@@ -44,6 +52,37 @@ contract NaiveSonnetPub {
         name = "Naive Sonnet Publisher";
     }
 
+    function updatePoet(string memory _name, string memory _pfpUrl) public {
+        // Require name to exist and be shorter than or equal 18 chars
+        require(bytes(_name).length > 0);
+        require(bytes(_name).length <= 18);
+
+        // Require name be unique #naive O(n)
+        bool uniqueName = true;
+
+        // Find poet matching wallet address
+        uint accountPoetId = 0;
+        bool poetFound = false;
+
+        for (uint256 i = 0; i < poetCount; i ++) {
+            if(hashCompareWithLengthCheck(_name, poets[i].name)) {
+                if(payable(msg.sender) != poets[i].wallet) {
+                    uniqueName = false;
+                }
+            }
+            if(payable(msg.sender) == poets[i].wallet) {
+                poetFound = true;
+                accountPoetId = i;
+            }
+        }
+        require(uniqueName, "That name is already in use.");
+        require(poetFound, "There's no poet for this account.");
+
+        poets[accountPoetId] = Poet(accountPoetId, block.timestamp, _name, _pfpUrl, payable(msg.sender));
+        
+        emit PoetUpdated(accountPoetId, block.timestamp, _name, _pfpUrl, payable(msg.sender));
+    }
+
     function addPoet(string memory _name, string memory _pfpUrl) public {
         // Require name to exist and be shorter than or equal 18 chars
         require(bytes(_name).length > 0);
@@ -51,12 +90,17 @@ contract NaiveSonnetPub {
 
         // Require name be unique #naive O(n)
         bool uniqueName = true;
+        bool newAccount = true;
         for (uint256 i = 0; i < poetCount; i ++) {
             if(hashCompareWithLengthCheck(_name, poets[i].name)) {
                 uniqueName = false;
             }
+            if(payable(msg.sender) == poets[i].wallet) {
+                newAccount = false;
+            }
         }
         require(uniqueName, "That name is already in use.");
+        require(newAccount, "Poet already exists for this account, update instead.");
 
         poets[poetCount] = Poet(poetCount, block.timestamp, _name, _pfpUrl, payable(msg.sender));
         poetCount++;
