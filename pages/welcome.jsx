@@ -10,6 +10,7 @@ const Welcome = ({props}) => {
   console.log("props are", props);
   const [ alias, setAlias ] = React.useState("");
   const [ pfpUrl, setPfpUrl ] = React.useState("http://sonn3t.com/pfps/pfp_0.png");
+  const [ loading, setLoading ] = React.useState(false);
 
   const [ step, setStep ] = React.useState(0);
   const [ errorMsg, setErrorMsg ] = React.useState("");
@@ -31,7 +32,19 @@ const Welcome = ({props}) => {
 
   const router = useRouter();
   const onSubmitPic = React.useCallback(() => {
-    addPoet(alias, pfpUrl, setErrorMsg, () => {router.push(`/poet/${alias}`)});
+    setLoading(true);
+
+    const onError = () => {
+      setErrorMsg("There was a problem setting up the account.");
+      setLoading(false);
+    }
+
+    const onSuccess = () => {
+      router.push(`/poet/${alias}`);
+      setLoading(false);
+    };
+
+    addPoet(alias, pfpUrl, onError, onSuccess);
   }, [addPoet, alias, pfpUrl, router]);
 
   return (
@@ -41,7 +54,7 @@ const Welcome = ({props}) => {
         step === 0 ?
         <UserSetup alias={alias} setAlias={setAlias} onSubmit={onSubmitAlias} errorMsg={errorMsg} />
         :
-        <PicSetup pfpUrl={pfpUrl} setPfpUrl={setPfpUrl} onSubmit={onSubmitPic} errorMsg={errorMsg} />
+        <PicSetup pfpUrl={pfpUrl} setPfpUrl={setPfpUrl} onSubmit={onSubmitPic} errorMsg={errorMsg} loading={loading} />
       }
     </div>
   )

@@ -8,9 +8,10 @@ interface PicSetupProps {
   setPfpUrl: (url: string) => {};
   onSubmit: () => void;
   errorMsg: string;
+  loading: boolean;
 }
 
-const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMsg}) => {
+const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMsg, loading}) => {
     const isDesktop = useIsDesktop();
 
     const pics = new Array(6).fill(null);
@@ -62,9 +63,13 @@ const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMs
           </div>
           <div style={{marginTop: 24}}>
             </div>
-            <BlockButton label='Confirm' onClick={onSubmit} />
+            {
+              loading ?
+              <BlockButton label='Loading...' onClick={() => {}} />
+              :
+              <BlockButton label='Confirm' onClick={onSubmit} />
+            }
         </div>
-        
       </div>
     );
 }
