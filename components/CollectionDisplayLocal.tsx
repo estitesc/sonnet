@@ -21,7 +21,7 @@ const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
             {
               poems.length > 0 ?
               chunks.map((chunk, index) => (
-                <PoemRow poems={chunk} key={index} />
+                <PoemRow poems={chunk} key={index} local/>
               ))
               :
               <PoemPlaceholder />

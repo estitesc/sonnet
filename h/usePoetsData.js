@@ -30,20 +30,21 @@ const usePoetsData = () => {
         const poet = await sonnet?.methods.poets(i).call();
         loadedPoets.push(poet);
       }
+      console.log("loaded poets are", loadedPoets);
       setPoets(loadedPoets);
     } else {
       window.alert('Naive Sonnet contract not deployed to detected network.')
     }
   }
 
-  const addPoet = React.useCallback((alias, pfpUrl, setErrorMsg) => {
+  const addPoet = React.useCallback((alias, pfpUrl, onError, onSuccess) => {
     sonnetCon?.methods.addPoet(alias, pfpUrl).send({ from: account })
     .on('confirmation', (confNumber, receipt) => {
       console.log("confirmed poet added", confNumber, receipt);
-      loadBlockchainData();
+      onSuccess();
     })
     .on('error', (error) => {
-      setErrorMsg("There was a problem setting up the account.");
+        onError();
       console.log("error adding poet", error);
     })
   }, [account, sonnetCon?.methods]);

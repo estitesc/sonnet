@@ -9,7 +9,7 @@ interface CollectionDisplayProps {
 }
 
 const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
-  const poemObjects = poems.map((poem: any) => convertPoem(poem));
+  const poemObjects = _.reverse(poems.map((poem: any) => convertPoem(poem)));
 
   const chunks = _.chunk(poemObjects, 3);
 

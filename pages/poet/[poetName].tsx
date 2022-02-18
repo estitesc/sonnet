@@ -21,8 +21,6 @@ const PoetPage: React.FC<PoetPageProps> = ({props}) => {
 
   useTargetPoetData(poetName, setAccount, setPoet, setPoems);
 
-  // console.log("this stuff",{ account, poet, poems }  );
-
   return (
     <div className={styles.container}>
       <Navbar account={account} />

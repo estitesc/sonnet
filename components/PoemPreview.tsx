@@ -4,9 +4,10 @@ import useIsDesktop from '../h/useIsDesktop';
 
 interface PoemPreviewProps {
   poem: any;
+  local?: boolean;
 }
 
-const PoemPreview: React.FC<PoemPreviewProps> = ({poem}) => {
+const PoemPreview: React.FC<PoemPreviewProps> = ({poem, local}) => {
     const isDesktop = useIsDesktop();
     const [mouseOver, setMouseOver] = React.useState(false);
 
@@ -41,7 +42,7 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem}) => {
     }
 
     return (
-      <Link href={`/poem/${poem.index}`}>
+      <Link href={local ? `/poemLocal/${poem.index}` : `/poem/${poem.id}`}>
         <div style={{
           border: 'solid 1px #FDFCFC', 
           flex: 1, 

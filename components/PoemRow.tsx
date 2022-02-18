@@ -4,9 +4,10 @@ import PoemPreview from './PoemPreview';
 
 interface PoemRowProps {
   poems: any;
+  local?: boolean;
 }
 
-const PoemRow: React.FC<PoemRowProps> = ({poems}) => {
+const PoemRow: React.FC<PoemRowProps> = ({poems, local}) => {
   const placeHolders = new Array(3 - poems.length).fill(null);
   const isDesktop = useIsDesktop();
 
@@ -18,7 +19,7 @@ const PoemRow: React.FC<PoemRowProps> = ({poems}) => {
         }}>
           { poems.map((poem: any, key: string) => {
             return(
-              <PoemPreview poem={poem} key={key}/>
+              <PoemPreview poem={poem} key={key} local={local}/>
             )
           })}
           { placeHolders.map((placeholder: void, key: number) => {

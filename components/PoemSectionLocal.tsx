@@ -2,15 +2,16 @@ import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
 // import Image from "next/image";
 import Link from 'next/link';
+import useUserData from '../h/useUserData';
 import SmallButton from './SmallButton';
 
 interface PoemSectionProps {
   poem: any;
-  poet: any;
 }
 
-const PoemSection: React.FC<PoemSectionProps> = ({poem, poet}) => {
+const PoemSection: React.FC<PoemSectionProps> = ({poem}) => {
     const isDesktop = useIsDesktop();
+    const { alias, pfpIndex } = useUserData();
 
     const getFontSize = (poemSize: number) => {
       if(isDesktop) {
@@ -37,13 +38,13 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem, poet}) => {
       <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
         
         <div style={{position: 'relative'}}>
-          <Link href={`/poet/${poet.name}`}>
+          <Link href="/collection">
             <div style={{position: 'absolute', left: "-48px", top: 0, fontSize: 24, cursor: 'pointer'}}>
               ←
             </div>
           </Link>
           <div style={{fontSize: 12, marginBottom: 24}}>
-            SONN3T #{poem.id}
+            SONN3T #{poem.index}
           </div>
           <div 
             id="content" 
@@ -62,9 +63,9 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem, poet}) => {
           <div style={{fontSize: 12, marginTop: 24}}>
             {
               poem.createdAt ?
-              new Date(parseInt(poem.createdAt) * 1000).toLocaleDateString('en-us', { year:"numeric", month:"2-digit", day: '2-digit'})
+              new Date(poem.createdAt).toLocaleDateString('en-us', { year:"numeric", month:"2-digit", day: '2-digit'})
               :
-              '01.11.22'
+              '09.23.22'
             }
           </div>
           {/* <div style={{display: 'flex', alignItems: 'center' , marginTop: 24}}>
@@ -84,7 +85,7 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem, poet}) => {
             </div> */}
           
           <div style={{fontSize: 12, marginTop: 24}}>
-            <b>poet</b> {poet.name}
+            <b>poet</b> {alias}
           </div>
           <div style={{fontSize: 12}}>
             <b>patron</b> 0xpatron.eth
