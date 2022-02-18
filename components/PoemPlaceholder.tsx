@@ -16,7 +16,7 @@ const PoemPlaceholder: React.FC = () => {
           flexDirection:'column',
           margin: isDesktop ? '0px 12px 24px 12px' : '6px',
           fontSize: 14,
-          lineHeight: '125%',
+          lineHeight: '120%',
           width: isDesktop ? 144 : 106,
           height: isDesktop ? 144 : 106,
           border: 'solid 1px #FDFCFC',

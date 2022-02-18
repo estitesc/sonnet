@@ -59,7 +59,7 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem, local}) => {
         id="content" 
         style={{
           fontSize: getFontSize(poem.size),
-          lineHeight: '125%',
+          lineHeight: '120%',
           overflow: 'hidden',
         }}
         onMouseEnter={() => setMouseOver(true)}
