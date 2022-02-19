@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 import Navbar from '../../components/NavbarNew';
 import PoemSection from '../../components/PoemSectionLocal';
-import AnimatedPoemSection from '../../components/AnimatedPoemSection';
 import styles from '../../styles/Home.module.css';
 import usePoemData from '../../h/usePoemData';
 
@@ -27,34 +26,10 @@ const Poem = ({props}) => {
     "and yet we faltered.",
   ];
 
-  const poemLines14 = [
-    "lost in a creepy conversation",
-    "not knowing who I am      now",
-    "they speak of influencers and",
-    "nft marketing, while   others",
-    "here sip kava and craft  love",
-    "a girl hums happy, nonchalant",
-    "lost in a creepy conversation",
-    "not knowing who I am      now",
-    "they speak of influencers and",
-    "nft marketing, while   others",
-    "here sip kava and craft  love",
-    "a girl hums happy, nonchalant",
-    "here sip kava and craft  love",
-    "a girl hums happy, nonchalant",
-  ];
-
   const poem12 = {
     size: 12,
     lines: poemLines12,
     }
-
-  const poem14 = {
-      size: 14,
-      lines: poemLines14,
-  }
-
-//   const poems = [poem12, poem14];
 
   const { getPoemData } = usePoemData();
 
@@ -71,7 +46,6 @@ const Poem = ({props}) => {
     <div className={styles.container}>
       <Navbar account={"0x5ome1…"} poemCount={1} poemId={1} />
       <PoemSection poem={poem}/>
-      {/* <AnimatedPoemSection /> */}
     </div>
   )
 }
