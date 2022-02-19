@@ -3,7 +3,6 @@ import loadWeb3 from '../utils/loadWeb3';
 import NaiveSonnetPub from '../abis/NaiveSonnetPub.json';
 
 const useTargetPoemData = (poemId, setAccount, setPoem, setPoet) => {
-  
   const loadBlockchainData = React.useCallback(async () => {
     const web3 = window.web3
     // Load account

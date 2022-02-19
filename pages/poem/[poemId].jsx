@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 import Navbar from '../../components/NavbarNew';
 import PoemSection from '../../components/PoemSection';
-import AnimatedPoemSection from '../../components/AnimatedPoemSection';
+// import AnimatedPoemSection from '../../components/AnimatedPoemSection';
 import styles from '../../styles/Home.module.css';
 import useTargetPoemData from '../../h/useTargetPoemData';
 import convertPoem from '../../utils/convertPoem';

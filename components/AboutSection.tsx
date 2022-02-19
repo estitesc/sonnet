@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 const AboutSection: React.FC = () => {
-
     return (
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%', alignItems: 'center'}}>
             <div style={{maxWidth: 340}}>
