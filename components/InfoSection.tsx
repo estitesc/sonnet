@@ -20,7 +20,7 @@ const InfoSection: React.FC<InfoSectionProps> = ({poet}) => {
                     </Link>
                     :
                     <Link href={`/welcome`}>
-                        <BlockButton label='Create profile' onClick={() => {}} />
+                        <BlockButton label='Create Profile' onClick={() => {}} />
                     </Link>
                 }
                 <p>&nbsp;</p>

@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({account}) => {
       <nav>
         <div style={{display: 'flex', flexDirection: 'row', flex: 1, justifyContent: 'space-between', padding: "16px 0px"}}>
           <div style={{paddingLeft: isDesktop ? 0 : 12}}>
-            <Link href="/about">
+            <Link href="/">
               <div style={{cursor: 'pointer'}}>
                 <Image src="/icon_small_b_w.png" width={32} height={32} />
               </div>

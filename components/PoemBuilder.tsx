@@ -12,9 +12,10 @@ interface PoemBuilderProps {
     setErrorMsg: (msg: string) => void,
     onSuccess: () => void
   ) => void;
+  poet: any;
 }
 
-const PoemBuilder: React.FC<PoemBuilderProps> = ({poemLength, addPoem}) => {
+const PoemBuilder: React.FC<PoemBuilderProps> = ({poemLength, addPoem, poet}) => {
     const isDesktop = useIsDesktop();
 
     const maxLength = poemLength;
@@ -22,16 +23,24 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({poemLength, addPoem}) => {
 
     const [lines, setLines] = React.useState(new Array(maxLength).fill(""));
     const [editingLine, setEditingLine] = React.useState(0);
+    const [loading, setLoading] = React.useState(false);
     const [errorMsg, setErrorMsg] = React.useState("");
 
     const router = useRouter();
 
     const onSavePoem = (lines: string[]) => {
+      setLoading(true);
       const name = "";
       const content = _.join(lines, '\n');
 
-      const onError = (msg: string) => setErrorMsg(msg);
-      const onSuccess = () => router.push('/collection');
+      const onError = (msg: string) => {
+        setLoading(false);
+        setErrorMsg(msg);
+      }
+      const onSuccess = () => {
+        setLoading(false);
+        router.push(`/poet/${poet.name}`);
+      }
 
       addPoem(name, content, onError, onSuccess);
     }
@@ -146,11 +155,15 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({poemLength, addPoem}) => {
             {
               (lines.length > 1 || lines[0].length > 0) &&
               <div>
-                <BlockButton label="Save On Chain" onClick={() => onSavePoem(lines)} />
+                {
+                  loading ?
+                  <BlockButton label="Saving..." onClick={() => {}} />
+                  :
+                  <BlockButton label="Save On Chain" onClick={() => onSavePoem(lines)} />
+                }
               </div>
             }
         </div>
-        
       </div>
     );
 }
