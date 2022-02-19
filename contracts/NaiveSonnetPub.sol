@@ -103,9 +103,9 @@ contract NaiveSonnetPub {
         require(newAccount, "Poet already exists for this account, update instead.");
 
         poets[poetCount] = Poet(poetCount, block.timestamp, _name, _pfpUrl, payable(msg.sender));
-        poetCount++;
-        
         emit PoetAdded(poetCount, block.timestamp, _name, _pfpUrl, payable(msg.sender));
+
+        poetCount++;
     }
 
     function addPoem(string memory _name, string memory _content) public {
@@ -125,9 +125,9 @@ contract NaiveSonnetPub {
         require(poetFound, "No poet exists for this wallet. Setup as a poet before creating a poem.");
         
         poems[poemCount] = Poem(poemCount, block.timestamp, poetId, _name, _content);
-        poemCount++;
-
         emit PoemAdded(poemCount, block.timestamp, poetId, _name, _content);
+
+        poemCount++;
     }
 
     function hashCompareWithLengthCheck(string memory a, string memory b) internal pure returns (bool) {

@@ -6,7 +6,7 @@ require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-contract('NaiveSonnetPub', ([deployer, poet, another_poet]) => {
+contract('NaiveSonnetPub', ([deployer, poet, another_poet, not_a_poet]) => {
   let sonnet
 
   before(async () => {
@@ -40,7 +40,7 @@ contract('NaiveSonnetPub', ([deployer, poet, another_poet]) => {
       // SUCCESS
       assert.equal(poetCount, 1)
       const event = result.logs[0].args
-      assert.equal(event.id.toNumber(), poetCount.toNumber(), 'id is correct')
+      assert.equal(event.id.toNumber(), poetCount.toNumber() - 1, 'id is correct')
       assert.equal(event.name, 'poetez', 'name is correct')
       assert.equal(event.pfpUrl, 'http://sonn3t.com/pfps/pfp_0.png', 'pfpUrl is correct')
       assert.equal(event.wallet, poet, 'owner is correct')
@@ -53,6 +53,30 @@ contract('NaiveSonnetPub', ([deployer, poet, another_poet]) => {
 
       // FAILURE: Require name
       await await sonnet.addPoet('', 'http://sonn3t.com/pfps/pfp_0.png', { from: another_poet }).should.be.rejected;
+    })
+  })
+
+  describe('poems', async () => {
+    let result, poemCount, poetResult
+
+    before(async () => {
+      poetResult = await sonnet.addPoet('poet_poet', 'http://sonn3t.com/pfps/pfp_0.png', { from: another_poet })
+      result = await sonnet.addPoem('', 'short\nlittle\npoem', { from: another_poet })
+      poemCount = await sonnet.poemCount();
+    })
+
+    it('adds poem', async () => {
+      // SUCCESS
+      assert.equal(poemCount, 1)
+      const poetEvent = poetResult.logs[0].args
+      const event = result.logs[0].args
+      assert.equal(event.id.toNumber(), poemCount.toNumber() - 1, 'id is correct')
+      assert.equal(event.name, '', 'name is correct')
+      assert.equal(event.content, 'short\nlittle\npoem', 'content is correct')
+      assert.equal(event.poetId.toNumber(), poetEvent.id.toNumber(), 'poet is correct')
+
+      // FAILURE: Require a poet before adding poem
+      await await sonnet.addPoem('', 'short\nlittle\npoem', { from: not_a_poet }).should.be.rejected;
     })
   })
 })
