@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Link from 'next/link';
 import Image from "next/image";
 import useIsDesktop from '../h/useIsDesktop';
+import loadWeb3 from '../utils/loadWeb3';
 
 interface NavbarProps {
     account: string;
@@ -26,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({account}) => {
               account ?
               <span >{_.truncate(account, {length: 12, omission: '…'})}</span>
               :
-              <span>Connect Wallet</span>
+              <span style={{cursor: 'pointer'}} onClick={loadWeb3}>Connect Wallet</span>
             }
           </a>
         </div>
