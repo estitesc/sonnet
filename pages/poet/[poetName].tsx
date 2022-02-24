@@ -3,8 +3,10 @@ import { useRouter } from 'next/router';
 import CollectionDisplay from '../../components/CollectionDisplay';
 import Navbar from '../../components/NavbarNew';
 import PoetHeader from '../../components/PoetHeader';
-import useTargetPoetData from '../../h/useTargetPoetData';
+import useTargetPoetEthers from '../../h/useTargetPoetEthers';
 import styles from '../../styles/Home.module.css';
+import _ from 'lodash';
+import useBrowserAccount from '../../h/useBrowserAccount';
 
 interface PoetPageProps {
     props: any;
@@ -19,7 +21,8 @@ const PoetPage: React.FC<PoetPageProps> = ({props}) => {
   const [poet, setPoet] = React.useState(null);
   const [poems, setPoems] = React.useState([]);
 
-  useTargetPoetData(poetName, setAccount, setPoet, setPoems);
+  useBrowserAccount(setAccount);
+  useTargetPoetEthers(_.join(poetName, ''), setPoet, setPoems);
 
   return (
     <div className={styles.container}>
@@ -28,7 +31,7 @@ const PoetPage: React.FC<PoetPageProps> = ({props}) => {
         poet ?
         <>
           <PoetHeader poemCount={poems.length} poet={poet} account={account} />
-          <CollectionDisplay poems={poems}/>
+          <CollectionDisplay poems={poems} isOwner={poet && account === poet.wallet} />
         </>
         :
         <div style={{textAlign: 'center', marginTop: 24}}>

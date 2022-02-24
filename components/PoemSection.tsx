@@ -43,7 +43,7 @@ const PoemSection: React.FC<PoemSectionProps> = ({poem, poet}) => {
             </div>
           </Link>
           <div style={{fontSize: 12, marginBottom: 24}}>
-            SONN3T #{poem.id}
+            SONN3T #{poem.id.toNumber()}
           </div>
           <div 
             id="content" 

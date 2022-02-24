@@ -4,7 +4,8 @@ import Navbar from '../../components/NavbarNew';
 import PoemSection from '../../components/PoemSection';
 // import AnimatedPoemSection from '../../components/AnimatedPoemSection';
 import styles from '../../styles/Home.module.css';
-import useTargetPoemData from '../../h/useTargetPoemData';
+import useTargetPoemEthers from '../../h/useTargetPoemEthers';
+import useBrowserAccount from '../../h/useBrowserAccount';
 import convertPoem from '../../utils/convertPoem';
 
 const Poem = ({props}) => {
@@ -17,7 +18,8 @@ const Poem = ({props}) => {
   const [ poem, setPoem ] = React.useState(null);
   const [ poet, setPoet ] = React.useState(null);
 
-  useTargetPoemData(poemId, setAccount, setPoem, setPoet);
+  useBrowserAccount(setAccount);
+  useTargetPoemEthers(poemId, setPoem, setPoet);
 
   const convertedPoem = poem ? convertPoem(poem) : null;
 
@@ -28,7 +30,7 @@ const Poem = ({props}) => {
           (convertedPoem && poet) &&
           <PoemSection poem={convertedPoem} poet={poet}/>
       }
-      {/* <AnimatedPoemSection /> */}
+      {/* <AnimatedPoemSection poem={convertedPoem} /> */}
     </div>
   )
 }

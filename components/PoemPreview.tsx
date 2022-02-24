@@ -13,30 +13,18 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem, local}) => {
 
     const getFontSize = (poemSize: number) => {
       if(isDesktop) {
-        if(poemSize === 14) {
-          return 6;
-        }
         if(poemSize === 12) {
-          return 7;
+          return 9;
         }
-        if(poemSize === 10) {
-          return 8.5;
+        else {
+          return 21 - poemSize;
+        }
+      } else {
+        if(poemSize === 12) {
+          return 6.6;
         }
         else {
           return 19 - poemSize;
-        }
-      } else {
-        if(poemSize === 14) {
-          return 5;
-        }
-        if(poemSize === 12) {
-          return 5.5;
-        }
-        if(poemSize === 10) {
-          return 6.5;
-        }
-        else {
-          return 18 - poemSize;
         }
       }
     }
@@ -44,7 +32,7 @@ const PoemPreview: React.FC<PoemPreviewProps> = ({poem, local}) => {
     return (
       <Link href={local ? `/poemLocal/${poem.index}` : `/poem/${poem.id}`}>
         <div style={{
-          border: 'solid 1px #FDFCFC', 
+          border: 'solid 1px #756961',
           flex: 1, 
           display: 'flex', 
           justifyContent: 'center', 

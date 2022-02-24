@@ -6,9 +6,10 @@ import convertPoem from '../utils/convertPoem';
 
 interface CollectionDisplayProps {
   poems: any;
+  isOwner?: boolean;
 }
 
-const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
+const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems, isOwner}) => {
   const poemObjects = _.reverse(poems.map((poem: any) => convertPoem(poem)));
 
   const chunks = _.chunk(poemObjects, 3);
@@ -22,7 +23,7 @@ const CollectionDisplay: React.FC<CollectionDisplayProps> = ({poems}) => {
             maxWidth: 506,
           }}>
             {
-              poems.length > 0 ?
+              poems.length > 0 || !isOwner ?
               chunks.map((chunk, index) => (
                 <PoemRow poems={chunk} key={index} />
               ))

@@ -24,9 +24,9 @@ const InfoSection: React.FC<InfoSectionProps> = ({poet}) => {
                     </Link>
                 }
                 <p>&nbsp;</p>
-                <p>sonnet/work beta works with Polygon Mumbai testnet. For more info on how to set up Mumbai, <Link href="https://blog.pods.finance/guide-connecting-mumbai-testnet-to-your-metamask-87978071aca8"><a>click here</a></Link>.</p>
+                <p>sonnet/work beta works with Polygon. For info on how to set up Metamask with Polygon, <Link href="https://medium.com/stakingbits/setting-up-metamask-for-polygon-matic-network-838058f6d844"><a>click here</a></Link>. To request MATIC to get started, tweet your wallet address:</p>
                 
-                <p>by <a href="https://twitter.com/dreamh4cker">@dreamh4cker</a></p>
+                <p><a href="https://twitter.com/dreamh4cker">@dreamh4cker</a></p>
             </div>
         </div>
     );
