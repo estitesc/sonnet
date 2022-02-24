@@ -1,6 +1,12 @@
 import * as React from 'react';
 import loadWeb3 from '../utils/loadWeb3';
 
+declare global {
+  interface Window {
+      web3:any;
+  }
+}
+
 const useBrowserAccount = (setAccount: (account: string) => void) => {
   const loadAccount = React.useCallback(async () => {
     const web3 = window.web3;
