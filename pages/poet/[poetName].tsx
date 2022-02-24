@@ -18,7 +18,7 @@ const PoetPage: React.FC<PoetPageProps> = ({props}) => {
   const { poetName } = router.query;
 
   const [account, setAccount] = React.useState("");
-  const [poet, setPoet] = React.useState(null);
+  const [poet, setPoet] = React.useState({wallet: null});
   const [poems, setPoems] = React.useState([]);
 
   useBrowserAccount(setAccount);
@@ -28,7 +28,7 @@ const PoetPage: React.FC<PoetPageProps> = ({props}) => {
     <div className={styles.container}>
       <Navbar account={account} />
       {
-        poet ?
+        poet.wallet ?
         <>
           <PoetHeader poemCount={poems.length} poet={poet} account={account} />
           <CollectionDisplay poems={poems} isOwner={poet && account === poet.wallet} />
