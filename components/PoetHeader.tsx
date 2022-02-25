@@ -37,10 +37,10 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poet, account}) => {
             padding: 12,
           }}>
             <div style={{flex: 1}}>
-            <div style={{height: 144, width: 144, overflow: 'hidden', borderRadius: 80}}>
+            <div style={{height: 144, width: 144, overflow: 'hidden', borderRadius: 80, position: 'relative'}}>
               {
                 poet.pfpUrl &&
-                <Image src={poet.pfpUrl} height={144} width={144} />
+                <Image src={poet.pfpUrl} height={144} width={144} layout='fill' objectFit='cover'/>
               }
             </div>
             </div>

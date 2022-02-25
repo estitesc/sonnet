@@ -87,8 +87,8 @@ const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMs
                 uploading...
               </div>
               :
-              <div style={{marginTop: 32, width: 240, height: 240, borderRadius: 120, overflow: 'hidden'}}>
-                <Image src={pfpUrl} height={240} width={240}/>
+              <div style={{marginTop: 32, width: 240, height: 240, borderRadius: 120, overflow: 'hidden', position: 'relative'}}>
+                <Image src={pfpUrl} height={240} width={240} layout='fill' objectFit='cover'/>
               </div>
             }
           </div>
