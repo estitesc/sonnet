@@ -36,7 +36,7 @@ const useTargetPoetData = (poetName, setAccount, setPoet, setPoems) => {
         setPoems(loadedPoems);
       }
     } else {
-      window.alert('Naive Sonnet contract not deployed to detected network.')
+      window.alert('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet.')
     }
   }, [poetName, setAccount, setPoems, setPoet]);
 

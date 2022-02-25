@@ -2,6 +2,7 @@ import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
 import BlockButton from './BlockButton';
 import Image from 'next/image';
+import { create, Options } from 'ipfs-http-client';
 
 interface PicSetupProps {
   pfpUrl: string;
@@ -16,9 +17,28 @@ const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMs
 
     const pics = new Array(6).fill(null);
 
+    const [ loadingPic, setLoadingPic ] = React.useState(false);
+
+    const infuraUrl = 'https://ipfs.infura.io:5001/api/v0' as Options;
+    const client = create(infuraUrl);
+
     const onSelectPic = React.useCallback((picIndex: number) => {
       setPfpUrl(`http://sonn3t.com/pfps/pfp_${picIndex}.png`);
     }, [setPfpUrl]);
+
+    const onUpload = React.useCallback(async (e) => {
+      setLoadingPic(true);
+      const file = e.target.files[0]
+      try {
+        const added = await client.add(file)
+        const url = `https://ipfs.infura.io/ipfs/${added.path}`
+        setPfpUrl(url);
+        setLoadingPic(false);
+      } catch (error) {
+        console.log('Error uploading file: ', error);
+        setLoadingPic(false);
+      }
+    }, [client, setPfpUrl]);
 
     return (
       <div 
@@ -54,12 +74,23 @@ const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMs
                 })
               }
             </div>
-            <div style={{marginTop: 32, width: 240, height: 240, borderRadius: 120, overflow: 'hidden'}}>
-              <Image src={pfpUrl} height={240} width={240}/>
+            <div style={{marginTop: 24, marginBottom: 12}}>or, upload your own</div>
+            <div>
+              <input
+                type="file"
+                onChange={onUpload}
+              />
             </div>
-            <div style={{marginTop: 24, fontSize: 12}}>
-              the ability to upload is coming soon :)
-            </div>
+            {
+              loadingPic ?
+              <div style={{marginTop: 32, width: 240, height: 240, borderRadius: 120, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                uploading...
+              </div>
+              :
+              <div style={{marginTop: 32, width: 240, height: 240, borderRadius: 120, overflow: 'hidden', position: 'relative'}}>
+                <Image src={pfpUrl} height={240} width={240} layout='fill' objectFit='cover'/>
+              </div>
+            }
           </div>
           <div style={{marginTop: 24}}>
             </div>

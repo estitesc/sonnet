@@ -1,24 +1,22 @@
 import * as React from 'react';
 import Navbar from '../components/NavbarNew';
-import SonnetWhySection from '../components/SonnetWhySection';
+import SetupSection from '../components/SetupSection';
 import styles from '../styles/Home.module.css';
 import useAccountPoetData from '../h/useAccountPoetData';
 
-const Home = ({props}) => {
+const Setup = ({props}) => {
   console.log("props are", props);
 
-  // web3 state
   const [account, setAccount] = React.useState("");
-  const [poet, setPoet] = React.useState(null);
 
-  useAccountPoetData(setAccount, setPoet);
+  useAccountPoetData(setAccount, () => {});
 
   return (
     <div className={styles.container}>
       <Navbar account={account} />
-      <SonnetWhySection poet={poet} />
+      <SetupSection account={account} />
     </div>
   )
 }
 
-export default Home
+export default Setup

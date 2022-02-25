@@ -15,7 +15,7 @@ const useCreatePoem = () => {
   const loadBlockchainData = async () => {
     const web3 = window.web3
     // Load account
-    const accounts = await web3.eth.getAccounts()
+    const accounts = await web3.eth.getAccounts();
     setAccount(accounts[0]);
     const networkId = await web3.eth.net.getId()
     const networkData = NaiveSonnetPub.networks[networkId]
@@ -23,13 +23,18 @@ const useCreatePoem = () => {
       const sonnet = new web3.eth.Contract(NaiveSonnetPub.abi, networkData.address);
       setSonnetCon(sonnet);
     } else {
-      window.alert('Naive Sonnet contract not deployed to detected network.')
+      window.alert('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet.')
     }
   }
 
-  const addPoem = React.useCallback((name, content, setErrorMsg, onSuccess) => {
+  const addPoem = React.useCallback(async (name, content, setErrorMsg, onSuccess) => {
     console.log("adding poem like", name, content);
-    sonnetCon?.methods.addPoem(name, content).send({ from: account })
+    let gasPrice = 50000000000;
+    const web3 = window.web3
+    await web3.eth.getGasPrice().then((price) => gasPrice = price);
+    const gasPlusBoost = Math.floor(gasPrice * 1.15);
+
+    sonnetCon?.methods.addPoem(name, content).send({ from: account, gasPrice: gasPlusBoost })
     .on('confirmation', (confNumber, receipt) => {
       console.log("confirmed poem added", confNumber, receipt);
       onSuccess();

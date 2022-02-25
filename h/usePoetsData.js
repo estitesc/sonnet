@@ -33,12 +33,17 @@ const usePoetsData = () => {
       console.log("loaded poets are", loadedPoets);
       setPoets(loadedPoets);
     } else {
-      window.alert('Naive Sonnet contract not deployed to detected network.')
+        window.alert('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet.')
     }
   }
 
-  const addPoet = React.useCallback((alias, pfpUrl, onError, onSuccess) => {
-    sonnetCon?.methods.addPoet(alias, pfpUrl).send({ from: account })
+  const addPoet = React.useCallback(async (alias, pfpUrl, onError, onSuccess) => {
+    let gasPrice = 50000000000;
+    const web3 = window.web3
+    await web3.eth.getGasPrice().then((price) => gasPrice = price);
+    const gasPlusBoost = Math.floor(gasPrice * 1.15);
+
+    sonnetCon?.methods.addPoet(alias, pfpUrl).send({ from: account, gasPrice: gasPlusBoost })
     .on('confirmation', (confNumber, receipt) => {
       console.log("confirmed poet added", confNumber, receipt);
       onSuccess();

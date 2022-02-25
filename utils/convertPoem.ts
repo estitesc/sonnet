@@ -11,7 +11,6 @@ const convertPoem = (poem: any) => {
 
 export const convertContentToLines = (poemContent: string) => {  
     const lines = _.split(poemContent, '\n');
-    console.log("lines are", lines);
 
     return {
         lines,
