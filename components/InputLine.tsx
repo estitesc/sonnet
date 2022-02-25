@@ -5,9 +5,10 @@ interface InputLine {
     setValue: (val: string) => void;
     onSubmit: () => void;
     maxLength?: number;
+    allowedChars?: string;
 }
 
-const InputLine: React.FC<InputLine> = ({value, setValue, onSubmit, maxLength = 28}) => {
+const InputLine: React.FC<InputLine> = ({value, setValue, onSubmit, maxLength = 28, allowedChars}) => {
     const handleKeyPress = React.useCallback((e: any) => {
         if(e.code === 'Enter') {
             onSubmit();
@@ -23,6 +24,9 @@ const InputLine: React.FC<InputLine> = ({value, setValue, onSubmit, maxLength = 
 
         if(value.length <= maxLength) {
             if(e.key.length === 1) {
+                if(allowedChars && !allowedChars.includes(e.key)) {
+                    return;
+                }
                 newVal = `${value}${e.key}`;
             }
             

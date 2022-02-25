@@ -40,7 +40,7 @@ const UserSetup: React.FC<UserSetupProps> = ({alias, setAlias, onSubmit, errorMs
             }
             <div style={{fontWeight: 'bold'}}>who are you?</div>
             <div style={{display:'flex'}}>
-              <InputLine value={alias} setValue={setAlias} onSubmit={onSubmitAlias} maxLength={18} />
+              <InputLine value={alias} setValue={setAlias} onSubmit={onSubmitAlias} maxLength={18} allowedChars={"1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM.-_$@!"} />
             </div>
             {
           !isDesktop &&
