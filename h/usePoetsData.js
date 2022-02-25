@@ -38,7 +38,12 @@ const usePoetsData = () => {
   }
 
   const addPoet = React.useCallback((alias, pfpUrl, onError, onSuccess) => {
-    sonnetCon?.methods.addPoet(alias, pfpUrl).send({ from: account })
+    let gasPrice = 50000000000;
+    const web3 = window.web3
+    await web3.eth.getGasPrice().then((price) => gasPrice = price);
+    const gasPlusBoost = Math.floor(gasPrice * 1.15);
+
+    sonnetCon?.methods.addPoet(alias, pfpUrl).send({ from: account, gasPrice: gasPlusBoost })
     .on('confirmation', (confNumber, receipt) => {
       console.log("confirmed poet added", confNumber, receipt);
       onSuccess();
