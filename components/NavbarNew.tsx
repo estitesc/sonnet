@@ -6,10 +6,11 @@ import useIsDesktop from '../h/useIsDesktop';
 import loadWeb3 from '../utils/loadWeb3';
 
 interface NavbarProps {
-    account: string;
-  }
+  account: string;
+  poet?: any;
+}
 
-const Navbar: React.FC<NavbarProps> = ({account}) => {
+const Navbar: React.FC<NavbarProps> = ({account, poet}) => {
   const isDesktop = useIsDesktop();
 
     return (
@@ -25,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({account}) => {
           <a style={{color: "#F9F7F5", paddingRight: isDesktop ? 0 : 12}}>
             {
               account ?
-              <span >{_.truncate(account, {length: 12, omission: '…'})}</span>
+              <Link href={poet ? `/poet/${poet.name}` : '/'}><a style={{color: '#fdfcfc'}}>{_.truncate(account, {length: 12, omission: '…'})}</a></Link>
               :
               <span style={{cursor: 'pointer'}} onClick={loadWeb3}>Connect Wallet</span>
             }

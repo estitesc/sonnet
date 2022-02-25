@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import useIsDesktop from '../h/useIsDesktop';
@@ -125,7 +126,16 @@ const PoemBuilder: React.FC<PoemBuilderProps> = ({poemLength, addPoem, poet}) =>
         <div style={{
           width: 258,
           marginLeft: isDesktop ? 72 : 12,
+          position: 'relative',
         }}>
+          {
+            poet?.name &&
+            <Link href={`/poet/${poet.name}`}>
+              <div style={{position: 'absolute', left: "-48px", top: 0, fontSize: 24, cursor: 'pointer'}}>
+                ←
+              </div>
+            </Link>
+          }
           {
             errorMsg &&
             <div style={{fontStyle: 'italic', paddingBottom: 24}}>{errorMsg}</div>

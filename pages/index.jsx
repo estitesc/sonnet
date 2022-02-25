@@ -15,7 +15,7 @@ const Home = ({props}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={account} />
+      <Navbar account={account} poet={poet} />
       <SonnetWhySection poet={poet} />
     </div>
   )

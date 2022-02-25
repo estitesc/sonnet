@@ -15,7 +15,7 @@ const Write = ({props}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={account} />
+      <Navbar account={account} poet={poet} />
       <PoemBuilder poemLength={12} addPoem={addPoem} poet={poet} />
     </div>
   )
