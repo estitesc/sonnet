@@ -37,7 +37,7 @@ const usePoetsData = () => {
     }
   }
 
-  const addPoet = React.useCallback((alias, pfpUrl, onError, onSuccess) => {
+  const addPoet = React.useCallback(async (alias, pfpUrl, onError, onSuccess) => {
     let gasPrice = 50000000000;
     const web3 = window.web3
     await web3.eth.getGasPrice().then((price) => gasPrice = price);
