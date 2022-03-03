@@ -24,7 +24,7 @@ const useAccountPoetData = (setAccount, setPoet) => {
         }
       }
     } else {
-      window.alert('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet.')
+      console.log('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet. (account poet data)')
     }
   }, [setAccount, setPoet]);
 

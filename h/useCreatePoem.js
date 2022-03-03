@@ -23,7 +23,7 @@ const useCreatePoem = () => {
       const sonnet = new web3.eth.Contract(NaiveSonnetPub.abi, networkData.address);
       setSonnetCon(sonnet);
     } else {
-      window.alert('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet.')
+      console.log('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet. (create poem)')
     }
   }
 

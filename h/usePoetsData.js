@@ -33,7 +33,7 @@ const usePoetsData = () => {
       console.log("loaded poets are", loadedPoets);
       setPoets(loadedPoets);
     } else {
-        window.alert('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet.')
+        console.log('Sonnet contract not deployed to this network. Make sure you are using Polygon Mainnet. (poets data)')
     }
   }
 
