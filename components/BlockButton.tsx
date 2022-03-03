@@ -12,9 +12,8 @@ const BlockButton: React.FC<BlockButtonProps> = ({onClick, label}) => {
             borderStyle: 'solid',
             borderWidth: 1,
             borderColor: '#ffffff',
-            marginTop: 12,
             display: 'inline-block',
-            cursor: 'pointer'
+            cursor: 'pointer',
         }}>
             <div style={{ color: "#fbfbf8", fontSize: 14 }}>{label}</div>
         </div>

@@ -93,13 +93,13 @@ const PicSetup: React.FC<PicSetupProps> = ({pfpUrl, setPfpUrl, onSubmit, errorMs
             }
           </div>
           <div style={{marginTop: 24}}>
-            </div>
             {
               loading ?
               <BlockButton label='Loading...' onClick={() => {}} />
               :
               <BlockButton label='Confirm' onClick={onSubmit} />
             }
+          </div>
         </div>
       </div>
     );

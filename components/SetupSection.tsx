@@ -54,7 +54,7 @@ const SetupSection: React.FC<SetupSectionProps> = ({account}) => {
                     {
                         showWallet ?
                         <div style={{marginTop: 24}}>
-                            <div style={{marginBottom: 12}}>Install a wallet:</div>
+                            <div style={{marginBottom: 12}}><i>Install a wallet:</i></div>
                             <div style={{marginBottom: 12}}>metamask is the most popular and well-supported wallet. follow <a href="https://metamask.io/download/" target="_blank" rel="noreferrer">instructions here</a> to install it.</div>
                             <div>remember, write your backup codes in a SAFE place and NEVER tell give to anyone for any reason.</div>
                         </div>
@@ -62,11 +62,11 @@ const SetupSection: React.FC<SetupSectionProps> = ({account}) => {
                         <BlockButton label="don't have wallet at all" onClick={() => setShowWallet(true)} />
                     }
                 </div>
-                <div style={{marginBottom: 6}}>
+                <div style={{marginBottom: 6, marginTop: 12}}>
                     {
                         showPolygon ? 
                         <div style={{marginTop: 24}}>
-                            <div style={{marginBottom: 12}}>Add Polygon network to wallet:</div>
+                            <div style={{marginBottom: 12}}><i>Add Polygon network to wallet:</i></div>
                             <div style={{marginBottom: 12, width: 148}}>
                                 <SmallButton label="add the polygon network" onClick={addPolygon} />
                             </div>
@@ -77,11 +77,11 @@ const SetupSection: React.FC<SetupSectionProps> = ({account}) => {
                         <BlockButton label="have a wallet but not on polygon" onClick={() => setShowPolygon(true)} />
                     }
                 </div>
-                <div style={{marginBottom: 6}}>
+                <div style={{marginBottom: 6, marginTop: 12}}>
                     {
                         showMatic ? 
                         <div style={{marginTop: 24}}>
-                            <div style={{marginBottom: 12}}>Get MATIC:</div>
+                            <div style={{marginBottom: 12}}><i>Get MATIC:</i></div>
                             <div style={{marginBottom: 12, width: 142}}>
                                 <a href={twitterLink} target="_blank" rel='noreferrer'>
                                     <SmallButton label="tweet to request MATIC" onClick={()=>{}} />
@@ -95,7 +95,7 @@ const SetupSection: React.FC<SetupSectionProps> = ({account}) => {
                     }
                 </div>
                 <div style={{marginTop: 24, marginBottom: 12}}><i>WHEN YOU ARE READY</i></div>
-                <div style={{marginBottom: 6}}>once you have your wallet is set up, connected to polygon, and filled with some MATIC, are ready to proceed.</div>
+                <div style={{marginBottom: 24}}>once you have your wallet is set up, connected to polygon, and filled with some MATIC, are ready to proceed.</div>
                 <Link href={`/welcome`}>
                     <BlockButton label='Create Profile' onClick={() => {}} />
                 </Link>

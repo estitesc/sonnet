@@ -36,7 +36,7 @@ const WriteSetup: React.FC<WriteSetupProps> = ({onSubmit, poemLength, setPoemLen
               <PoemSizeButton size={14} width={36} onClick={() => setPoemLength(14)} isSelected={poemLength === 14}/>
             </div>
           </div>
-          <div style={{marginTop: 24}}>
+          <div style={{marginTop: 24, marginBottom: 12}}>
               poem will fit up to {maxLength} lines &lt;{maxChars} chars
             </div>
             <BlockButton label='Start Writing' onClick={onSubmit} />

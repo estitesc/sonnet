@@ -51,9 +51,9 @@ const UserSetup: React.FC<UserSetupProps> = ({alias, setAlias, onSubmit, errorMs
               type up to 18 characters
             </div>
           </div>
-          <div style={{marginTop: 24}}>
-            </div>
+          <div style={{marginTop: 36}}>
             <BlockButton label='Next' onClick={onSubmitAlias} />
+          </div>
         </div>
         
       </div>

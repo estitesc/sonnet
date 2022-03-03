@@ -20,16 +20,16 @@ const SonnetWhySection: React.FC<InfoSectionProps> = ({poet}) => {
                 <div style={{marginBottom: 6}}><b>EARN</b> future governance allocation for poems you submit</div>
                 {/* <div style={{marginTop: 24, marginBottom: 12}}>&lt;attn&gt;<i>NOT YOUR GMA's SONNET</i>&lt;/attn&gt;</div> */}
                 <div style={{marginTop: 24, marginBottom: 12}}><i>NOT YOUR GRANNY&apos;S SONNET</i></div>
-                <div style={{marginBottom: 6}}>your canvas is a 12 line by 24 char monospace square. rhyme, prose, concrete, haiku... whatever fits in those 288 chars is at home here.</div>
+                <div style={{marginBottom: 24}}>your canvas is a 12 line by 24 char monospace square. rhyme, prose, concrete, haiku... whatever fits in those 288 chars is at home here.</div>
                 {
                     poet ?
-                <Link href={`/poet/${poet.name}`}>
-                    <BlockButton label='Go to Profile' onClick={() => {}} />
-                </Link>
-                :
-                <Link href={`/setup`}>
-                    <BlockButton label='Get Started' onClick={() => {}} />
-                </Link>
+                    <Link href={`/poet/${poet.name}`}>
+                        <BlockButton label='Go to Profile' onClick={() => {}} />
+                    </Link>
+                    :
+                    <Link href={`/setup`}>
+                        <BlockButton label='Get Started' onClick={() => {}} />
+                    </Link>
                 }
             </div>
         </div>

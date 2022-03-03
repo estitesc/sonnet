@@ -62,10 +62,10 @@ const PoetHeader: React.FC<PoetHeaderProps> = ({poemCount, poet, account}) => {
               {
                 account === poet.wallet &&
                 <div style={{display: 'flex', marginTop: 8}}>
-                <Link href="/write">
-                  <SmallButton onClick={() => {}} label="add a poem" />
-                </Link>
-              </div>
+                  <Link href="/write">
+                    <SmallButton onClick={() => {}} label="add a poem" />
+                  </Link>
+                </div>
               }
             </div>
         </div>
