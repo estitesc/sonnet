@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from "next/image";
 import useIsDesktop from '../h/useIsDesktop';
 import loadWeb3 from '../utils/loadWeb3';
+import WalletConnector from './WalletConnector';
 
 interface NavbarProps {
   account: string;
@@ -23,14 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({account, poet}) => {
               </div>
             </Link> 
           </div>
-          <a style={{color: "#F9F7F5", paddingRight: isDesktop ? 0 : 12}}>
-            {
-              account ?
-              <Link href={poet ? `/poet/${poet.name}` : '/'}><a style={{color: '#fdfcfc'}}>{_.truncate(account, {length: 12, omission: '…'})}</a></Link>
-              :
-              <span style={{cursor: 'pointer'}} onClick={loadWeb3}>Connect Wallet</span>
-            }
-          </a>
+          <WalletConnector poet={poet} />
         </div>
       </nav>
     );
