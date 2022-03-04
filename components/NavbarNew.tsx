@@ -28,7 +28,7 @@ const Navbar: React.FC<NavbarProps> = ({account, poet, showWallet, showAbout}) =
             {
               showAbout &&
               <Link href="/start">
-                <div style={{padding: '6px 0px 0px 24px'}}>
+                <div style={{padding: '6px 0px 0px 24px', cursor: 'pointer'}}>
                   about
                 </div>
               </Link>
