@@ -1,5 +1,6 @@
 import * as React from 'react';
 import CollectionDisplay from '../components/CollectionDisplay';
+import Spinner from '../components/Spinner';
 import Navbar from '../components/NavbarNew';
 import styles from '../styles/Home.module.css';
 import _ from 'lodash';
@@ -22,7 +23,12 @@ const AllPage: React.FC<AllPageProps> = ({props}) => {
   return (
     <div className={styles.container}>
       <Navbar account={account} />
-      <CollectionDisplay poems={poems} isOwner={false} />
+      {
+        poems.length === 0 ?
+        <Spinner />
+        :
+        <CollectionDisplay poems={poems} isOwner={false} />
+      }
     </div>
   )
 }

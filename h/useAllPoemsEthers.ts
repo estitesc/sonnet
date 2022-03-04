@@ -12,7 +12,9 @@ const useAllPoemsEthers = (setPoems: (poems: any) => void) => {
       const loadedPoems = [];
       for (var i = 0; i < poemCount; i++) {
         const poem = await contract.poems(i);
-        loadedPoems.push(poem);
+        if(poem.content.length > 24) {
+          loadedPoems.push(poem);
+        }
       }
       setPoems(loadedPoems);
   }, [setPoems]);

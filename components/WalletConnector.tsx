@@ -28,7 +28,6 @@ const WalletConnector: React.FC<WalletConnectorProps> = ({poet}) => {
   const renderLinkButton = () => {
     if(!account) {
       return(
-        // <span style={{cursor: 'pointer'}} onClick={loadWeb3}></span>
         <BlockButton onClick={loadWeb3} label='Connect Wallet' />
       )
     }
