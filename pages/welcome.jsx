@@ -49,7 +49,7 @@ const Welcome = ({props}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={account} />
+      <Navbar account={account} showWallet />
       {
         step === 0 ?
         <UserSetup alias={alias} setAlias={setAlias} onSubmit={onSubmitAlias} errorMsg={errorMsg} />

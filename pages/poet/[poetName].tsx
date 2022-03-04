@@ -26,7 +26,7 @@ const PoetPage: React.FC<PoetPageProps> = ({props}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={account} />
+      <Navbar account={account} showWallet/>
       {
         poet.wallet ?
         <>

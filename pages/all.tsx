@@ -22,7 +22,7 @@ const AllPage: React.FC<AllPageProps> = ({props}) => {
 
   return (
     <div className={styles.container}>
-      <Navbar account={account} />
+      <Navbar account={account} showAbout/>
       {
         poems.length === 0 ?
         <Spinner />
